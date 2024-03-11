@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { doc, getDoc, getFirestore } from 'firebase/firestore';
 import { auth } from '../firebase';
+import Sidebar from './Sidebar';
 
 const Navbar = () => {
     const db = getFirestore();
@@ -40,8 +41,33 @@ const Navbar = () => {
 
     return (
         <div>
+            {/* offCanvas */}
+            <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+                {/* <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasExampleLabel">NearbyNexus</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div> */}
+                <div class="offcanvas-body p-0">
+                    <div className="userNameData">
+                        <div className={`d-flex flex-row gap-1 justify-content-between p-2 align-items-center brandName`}>
+                            <div>
+                                <img src='/images/logo.png' alt="logo" />
+                                <span>NearbyNexus</span>
+                            </div>
+                            <div>
+                                <button  type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                            </div>
+                        </div>
+                        <div className='userAvatatContainerRes mt-1 d-flex flex-column align-items-center gap-2'>
+                            <img src={userImage} className='rounded-circle' alt="" />
+                            <span className='text-light'>Welcome, {userName}</span>
+                        </div>
+                    </div>
+                    <Sidebar resposiveData='d-lg-block' />
 
-
+                </div>
+            </div>
+            {/* nav */}
             <nav className="navContainer position-relative navbar navbar-expand-lg fixed-top bg-body-tertiary">
                 <div className="container-fluid">
                     <button className="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-expanded="false" aria-label="Toggle navigation">

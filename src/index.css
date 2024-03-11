@@ -14,7 +14,7 @@ code {
     monospace;
 }
 
-.right-side{
+.right-side {
   height: 100vh;
   overflow-x: auto;
 }
@@ -60,4 +60,16 @@ code {
 .brandName img {
   width: 40px;
   height: 40px;
+}
+
+/* nav offcanvas */
+.userNameData {
+  height: 200px;
+  background-color: #5046E5;
+}
+
+.userAvatatContainerRes img {
+  height: 85px;
+  width: 85px;
+
 }

@@ -69,7 +69,7 @@ function App() {
             <Navbar />
             <div className='d-flex flex-lg-row'>
               <div className='left-side'>
-                <Sidebar />
+                <Sidebar resposiveData='d-none d-lg-block' />
               </div>
               <div className='right-side w-100'>
                 <Routes>
