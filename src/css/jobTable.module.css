@@ -1,0 +1,30 @@
+.postTable th {
+    color: grey;
+    font-size: 14px;
+    font-weight: 600;
+    vertical-align: middle;
+
+}
+
+.postTable a {
+    text-decoration: none;
+}
+
+
+.postTable td {
+    color: black;
+    font-size: 14px;
+    padding: 10px;
+    vertical-align: middle;
+}
+
+
+.postTable img {
+    width: 30px;
+    height: 30px;
+    object-fit: cover;
+}
+
+.accordion-item {
+    border-top: transparent !important;
+}

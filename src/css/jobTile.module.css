@@ -1,0 +1,43 @@
+.jobCard {
+    cursor: pointer;
+    height: 100%;
+    transition: 0.5s ease-in-out;
+}
+
+.card_header i:hover {
+    color: red;
+}
+
+.jobCard:hover {
+    background-color: #7575ab17;
+}
+
+.card-title {
+    color: rgba(0, 0, 0, 0.77);
+    font-weight: bolder;
+    font-family: 'Noto Sans';
+}
+
+.company_name {
+    font-size: 13px;
+    color: var(--secondary-color);
+    font-weight: 500;
+    font-family: 'Poppins';
+
+}
+
+.description_list span {
+    color: #777585;
+    font-family: 'Poppins';
+    font-size: small;
+}
+
+.description_list i,
+.postedTime {
+    color: #777585;
+    font-size: small;
+}
+
+.postedTime i {
+    font-size: small;
+}

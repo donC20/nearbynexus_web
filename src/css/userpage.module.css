@@ -1,0 +1,90 @@
+.topHeading {
+  font-weight: 600;
+}
+
+.allUserTable th {
+  color: grey;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+
+
+.allUserTable td {
+  color: black;
+  font-size: 14px;
+  padding: 1%;
+  vertical-align: middle;
+}
+
+
+.allUserTable img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+}
+
+.allUserTable button:hover {
+  color: #5046E5;
+}
+
+.userAvatar {
+  position: relative;
+}
+
+.badge {
+  /* background-color: green; */
+  position: absolute;
+  border: 2px solid white;
+  bottom: 0;
+  /* padding: 1px; */
+  border-radius: 100%;
+  height: 12px;
+  width: 12px;
+}
+
+/* modal */
+.selectedUserImage {
+  width: 80px;
+  height: 80px;
+  border-radius: 100%;
+  object-fit: cover;
+}
+
+.banUserBtn,
+.unBanUserBtn {
+  border: none;
+  font-size: 12px;
+  border-radius: 30px;
+  /* Adjust as needed to get the desired stadium shape */
+  font-weight: bold;
+  padding: 5px 15px;
+  /* Increase padding for better appearance */
+  color: white;
+}
+
+.banUserBtn {
+  background-color: red;
+
+}
+
+.unBanUserBtn {
+  background-color: rgb(11, 206, 11);
+}
+
+
+
+.unBanUserBtn:hover {
+  color: white !important;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.292);
+
+  /* Add a shadow effect */
+}
+
+.banUserBtn:hover {
+  color: white !important;
+
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.292);
+
+  /* Add a shadow effect */
+}

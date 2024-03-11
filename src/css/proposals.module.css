@@ -1,0 +1,65 @@
+.jobDetailsTable td {
+    padding: 3%;
+    vertical-align: middle;
+    font-size: 14px;
+
+}
+
+.backbutton {
+    font-size: 35px;
+    color: black;
+}
+
+.jobDetailsTable tr {
+    vertical-align: middle;
+}
+
+.jobDetailsTable th {
+
+    font-size: 14.5px;
+    color: rgba(0, 0, 0, 0.627);
+
+}
+
+.appliedUserTable {
+    /* height: 50vh; */
+    max-height: 30vh;
+    overflow: auto;
+}
+
+.appliedUserTable img {
+    width: 40px;
+    height: 40px;
+}
+
+.accordiaUserTiles img {
+    width: 40px;
+    height: 40px;
+}
+
+.accordiaUserContainer {
+    display: flex;
+    flex-wrap: nowrap;
+    /* Prevent wrapping to multiple lines */
+    overflow-x: auto;
+    /* Add horizontal scrollbar if necessary */
+}
+
+.accordiaUserTiles {
+    position: relative;
+    z-index: 1;
+}
+
+.accordiaUserTiles img {
+    object-fit: cover;
+    width: 40px;
+    height: 40px;
+    position: relative;
+    /* left: -10px; */
+    /* Adjust as needed */
+}
+
+.proposalListContainer img {
+    width: 40px;
+    height: 40px;
+}
