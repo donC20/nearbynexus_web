@@ -11,6 +11,7 @@ const Login = () => {
     const [passwordError, setPasswordError] = useState('');
     const [isSigningIn, setIsSigningIn] = useState(false);
     const [signInError, setSignInError] = useState(null);
+    const [loading, setloading] = useState(false);
 
     const validateInputs = () => {
         let isValid = true;
@@ -39,11 +40,15 @@ const Login = () => {
 
     const onSubmit = async (e) => {
         e.preventDefault();
+        setloading(true)
         if (!isSigningIn && validateInputs()) {
             setIsSigningIn(true);
             try {
                 await signInWithEmailAndPassword(auth, email, password);
+                setloading(false)
+
             } catch (error) {
+                setloading(false)
                 setIsSigningIn(false);
                 // Handle sign-in error
                 if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password') {
@@ -57,14 +62,20 @@ const Login = () => {
 
 
     const googleSignIn = async () => {
+        setloading(true)
+
         try {
             const provider = new GoogleAuthProvider();
             await signInWithPopup(auth, provider); // Add await here
             // Handle successful sign-in here
+            setloading(false)
+
             setIsSigningIn(true);
 
         } catch (error) {
             console.error(error);
+            setloading(false)
+
             setIsSigningIn(false);
             if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password') {
                 setSignInError('Invalid email or password');
@@ -107,12 +118,16 @@ const Login = () => {
                             </div>
                             {passwordError && <p className={style.error}>{passwordError}</p>}
                         </div>
-                        <input
+                        {loading ? <div className={`d-flex align-items-center justify-content-center ${style.loader}`}>
+                            <div class="spinner-border text-light" role="status">
+                            </div>
+                        </div> : <input
                             type="submit"
                             value="Login"
                             className={`${style.btn} ${style.solid}`}
                             disabled={isSigningIn}
-                        />
+                        />}
+
                         {signInError && <p className={style.error}>{signInError}</p>}
                         <p className={style['social-text']}>Or Sign in with Google</p>
                         <div className={style['social-media']} onClick={googleSignIn}>

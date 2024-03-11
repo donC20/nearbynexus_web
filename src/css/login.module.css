@@ -8,7 +8,7 @@
     font-family: 'Montserrat', sans-serif;
 }
 
-.error{
+.error {
     color: red;
     transition: 2s ease-in-out;
 }
@@ -139,7 +139,8 @@ form.sign-in-form {
     border-color: #5046E5;
 }
 
-.btn {
+.btn,
+.loader {
     width: 150px;
     background-color: #5046E5;
     border: none;
@@ -283,9 +284,7 @@ form.sign-in-form {
     height: 60px;
 }
 
-.signGoogleButton{
-    
-}
+.signGoogleButton {}
 
 @media (max-width: 870px) {
     .container {
