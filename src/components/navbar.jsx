@@ -67,7 +67,7 @@ const Navbar = () => {
                             <span className='text-light'>Welcome, {userName}</span>
                         </div>
                     </div>
-                    <Sidebar resposiveData='d-lg-block' />
+                    <Sidebar resposiveData='d-lg-block' isSmallScreen={true} />
 
                 </div>
             </div>

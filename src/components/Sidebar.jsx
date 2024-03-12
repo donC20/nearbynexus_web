@@ -29,7 +29,7 @@ const Sidebar = (props) => {
             <div className={`${props.resposiveData} ${style.sidebar} `}>
                 <div className="p-3 d-flex flex-column">
                     <Link to="/dashboard">
-                        <div className={style.sideBarButton} data-bs-dismiss="offcanvas" aria-label="Close">
+                        <div className={`${style.sideBarButton} ${style[tabIOn == "dashboard" ? 'active' : '']}`} onClick={() => settabIOn('dashboard')} data-bs-dismiss={props.isSmallScreen ? 'offcanvas' : ''} aria-label="Close">
                             <i className="bi bi-speedometer2 me-3"></i>
                             <span>Dashboard</span>
                         </div>
@@ -37,25 +37,25 @@ const Sidebar = (props) => {
                     <hr />
                     <small className={style.subHeadings}>OTHERS</small>
                     <Link to="/users">
-                        <div className={style.sideBarButton} data-bs-dismiss="offcanvas" aria-label="Close">
+                        <div className={`${style.sideBarButton} ${style[tabIOn == "users" ? 'active' : '']}`} onClick={() => settabIOn('users')} data-bs-dismiss={props.isSmallScreen ? 'offcanvas' : ''} aria-label="Close">
                             <i className="bi bi-people me-3"></i>
                             <span>Users</span>
                         </div>
                     </Link>
                     <Link to="/jobs_posts">
-                        <div className={style.sideBarButton} data-bs-dismiss="offcanvas" aria-label="Close">
+                        <div className={`${style.sideBarButton} ${style[tabIOn == "jobs_posts" ? 'active' : '']}`} onClick={() => settabIOn('jobs_posts')} data-bs-dismiss={props.isSmallScreen ? 'offcanvas' : ''} aria-label="Close">
                             <i className="bi bi-person-workspace me-3"></i>
                             <span>Job posts</span>
                         </div>
                     </Link>
                     <Link to="/services">
-                        <div className={style.sideBarButton} data-bs-dismiss="offcanvas" aria-label="Close">
+                        <div className={`${style.sideBarButton} ${style[tabIOn == "services" ? 'active' : '']}`} onClick={() => settabIOn('services')} data-bs-dismiss={props.isSmallScreen ? 'offcanvas' : ''} aria-label="Close">
                             <i className="bi bi-wrench-adjustable-circle me-3"></i>
                             <span>Services</span>
                         </div>
                     </Link>
                     <Link to="/payments">
-                        <div className={style.sideBarButton} data-bs-dismiss="offcanvas" aria-label="Close">
+                        <div className={`${style.sideBarButton} ${style[tabIOn == "payments" ? 'active' : '']}`} onClick={() => settabIOn('payments')} data-bs-dismiss={props.isSmallScreen ? 'offcanvas' : ''} aria-label="Close">
                             <i className="bi bi-credit-card-fill me-3"></i>
                             <span>Payments</span>
                         </div>
@@ -63,7 +63,7 @@ const Sidebar = (props) => {
                     <hr />
                     <small className={style.subHeadings}>ACCOUNT</small>
 
-                    <div className={style.sideBarButton} onClick={handleLogout}>
+                    <div className={`${style.sideBarButton}`} onClick={handleLogout}>
                         <i className="bi bi-box-arrow-right me-3 text-danger"></i>
                         <span className='text-danger'>Logout</span>
                     </div>

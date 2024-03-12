@@ -32,3 +32,9 @@
     color: white !important;
     background-color: #5046E5;
 }
+
+.active {
+    border-radius: 5px;
+    color: white !important;
+    background-color: #5046E5;
+}
