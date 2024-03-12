@@ -7,6 +7,7 @@ import MainLoading from './mainLoading';
 const Sidebar = (props) => {
     const navigate = useNavigate(); // Get the navigate function
     const [signoutLoading, setSignoutLoading] = useState(false);
+    const [tabIOn, settabIOn] = useState('dashboard');
     const handleLogout = async () => {
         try {
             setSignoutLoading(true);
@@ -25,7 +26,7 @@ const Sidebar = (props) => {
 
     return (
         <div>
-            <div className={`${props.resposiveData} ${style.sidebar}`}>
+            <div className={`${props.resposiveData} ${style.sidebar} `}>
                 <div className="p-3 d-flex flex-column">
                     <Link to="/dashboard">
                         <div className={style.sideBarButton}>
@@ -33,30 +34,35 @@ const Sidebar = (props) => {
                             <span>Dashboard</span>
                         </div>
                     </Link>
+                    <hr />
+                    <small className={style.subHeadings}>OTHERS</small>
                     <Link to="/users">
                         <div className={style.sideBarButton}>
-                            <i className="bi bi-person me-3"></i>
+                            <i className="bi bi-people me-3"></i>
                             <span>Users</span>
                         </div>
                     </Link>
                     <Link to="/jobs_posts">
                         <div className={style.sideBarButton}>
-                            <i className="bi bi-person me-3"></i>
+                            <i className="bi bi-person-workspace me-3"></i>
                             <span>Job posts</span>
                         </div>
                     </Link>
                     <Link to="/services">
                         <div className={style.sideBarButton}>
-                            <i className="bi bi-person me-3"></i>
+                            <i className="bi bi-wrench-adjustable-circle me-3"></i>
                             <span>Services</span>
                         </div>
                     </Link>
                     <Link to="/payments">
                         <div className={style.sideBarButton}>
-                            <i className="bi bi-person me-3"></i>
+                            <i className="bi bi-credit-card-fill me-3"></i>
                             <span>Payments</span>
                         </div>
                     </Link>
+                    <hr />
+                    <small className={style.subHeadings}>ACCOUNT</small>
+
                     <div className={style.sideBarButton} onClick={handleLogout}>
                         <i className="bi bi-box-arrow-right me-3 text-danger"></i>
                         <span className='text-danger'>Logout</span>

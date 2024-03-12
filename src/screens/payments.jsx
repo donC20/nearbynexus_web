@@ -15,7 +15,7 @@ const Payments = () => {
             <p className='text-secondary'></p>
             <div className="d-flex flex-wrap gap-3">
                 <TopTileComponent icon='svg/coin-svgrepo-com.svg' title='Total transactions' value={totalTransactions} />
-                <TopTileComponent icon='svg/coin-svgrepo-com.svg' title='Total Revenue' value={totalCommission} />
+                <TopTileComponent icon='svg/chart-mixed-svgrepo-com.svg' title='Total Revenue' value={totalCommission} />
 
             </div>
             <br />

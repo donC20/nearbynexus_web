@@ -57,6 +57,8 @@ function App() {
     );
   }
 
+
+
   return (
 
     <Router>
@@ -73,6 +75,7 @@ function App() {
                 <Sidebar resposiveData='d-none d-lg-block' />
               </div>
               <div className='right-side w-100'>
+
                 <Routes>
                   <Route path="/dashboard" element={<Dashboard />} />
                   <Route path="/users" element={<UserPage />} />

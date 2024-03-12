@@ -29,7 +29,7 @@ const ServicesUsage = () => {
     );
 
     return (
-        <div className={`col p-4 rounded bg-white `}>
+        <div className={`col p-4 rounded bg-white shadow`}>
             <div className="d-flex justify-content-between align-items-center">
                 <h5 className=''>Service usage</h5>
                 <input

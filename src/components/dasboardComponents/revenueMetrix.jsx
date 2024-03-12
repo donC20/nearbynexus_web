@@ -53,7 +53,7 @@ const RevenueMatrix = () => {
 
 
     return (
-        <div className="col p-4 rounded bg-white">
+        <div className="col p-4 rounded bg-white shadow">
             <div className={`d-flex justify-content-between align-items-center ${style.amountValue}`}>
                 <div className="title d-flex flex-column">
                     <h5>Revenue</h5>

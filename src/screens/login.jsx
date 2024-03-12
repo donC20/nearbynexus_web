@@ -5,6 +5,7 @@ import { GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from 
 import { auth } from "../firebase";
 
 const Login = () => {
+
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [emailError, setEmailError] = useState('');
@@ -46,10 +47,11 @@ const Login = () => {
             try {
                 await signInWithEmailAndPassword(auth, email, password);
                 setloading(false)
-
+                setIsSigningIn(true);
             } catch (error) {
                 setloading(false)
                 setIsSigningIn(false);
+                
                 // Handle sign-in error
                 if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password') {
                     setSignInError('Invalid email or password');
@@ -69,8 +71,8 @@ const Login = () => {
             await signInWithPopup(auth, provider); // Add await here
             // Handle successful sign-in here
             setloading(false)
-
             setIsSigningIn(true);
+
 
         } catch (error) {
             console.error(error);

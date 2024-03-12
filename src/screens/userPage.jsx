@@ -37,7 +37,7 @@ const UserPage = () => {
         setLoading(false)
     };
     return (
-        <div className="container p-4">
+        <div className="container p-4 ">
             <div className="d-flex flex-column justify-content-start">
                 <h2 className={style.topHeading}>Manage Users</h2>
                 <p className='text-secondary'>Manage all users from a single place.</p>
@@ -51,7 +51,7 @@ const UserPage = () => {
             {loading ? <div className='d-flex justify-content-center'>
                 <CommonLoader />
             </div> :
-                <div className="p-4 bg-white rounded">
+                <div className="p-4 bg-white rounded shadow">
                     <div className="d-flex flex-column gap-2">
                         <b className=''><i className="bi bi-people-fill me-2"></i>All Users</b>
                         <small className='text-secondary'><b>{filteredUsers.length}</b> Registered users.</small>

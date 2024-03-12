@@ -2,7 +2,7 @@ import React from 'react'
 import style from '../../css/payments.module.css'
 const TopTileComponent = (props) => {
     return (
-        <div className="bg-white p-3 rounded d-flex gap-3 shadow-sm">
+        <div className="bg-white p-3 rounded d-flex gap-3 shadow-sm col-12 col-md-4 col-lg-3">
             <div className={style.preIconBack}>
                 <img className={style.preIcon} src={props.icon} alt="" />
             </div>

@@ -39,6 +39,8 @@ const AllProposals = (props) => {
                 </div>
             ) : (
                 <div>
+                    <h5>Applications</h5>
+                    <br />
                     <div className="accordion accordion-flush row" id="accordionFlushExample">
                         {jobData.length > 0 ? (
                             jobData.map((value, index) => (

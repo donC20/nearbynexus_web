@@ -2,13 +2,17 @@ import React, { useEffect, useState } from 'react';
 import { doc, getDoc, getFirestore } from 'firebase/firestore';
 import { auth } from '../firebase';
 import Sidebar from './Sidebar';
+import { useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
+    const navigate = useNavigate();
     const db = getFirestore();
     const [userId, setUid] = useState('');
     const [userData, setUserData] = useState(null);
 
     useEffect(() => {
+        navigate('/dashboard');
+
         const fetchData = async () => {
             // Get the current user's ID
             const currentUser = auth.currentUser;
@@ -55,7 +59,7 @@ const Navbar = () => {
                                 <span>NearbyNexus</span>
                             </div>
                             <div>
-                                <button  type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                             </div>
                         </div>
                         <div className='userAvatatContainerRes mt-1 d-flex flex-column align-items-center gap-2'>
@@ -68,7 +72,7 @@ const Navbar = () => {
                 </div>
             </div>
             {/* nav */}
-            <nav className="navContainer position-relative navbar navbar-expand-lg fixed-top bg-body-tertiary">
+            <nav className="navContainer position-relative navbar navbar-expand-lg  bg-body-tertiary">
                 <div className="container-fluid">
                     <button className="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>

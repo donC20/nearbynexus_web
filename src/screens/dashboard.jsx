@@ -64,9 +64,9 @@ const Dashboard = () => {
                 </div>
                 <br />
                 {/* cards */}
-                <div className={`row gap-3 ${style.staticsContainer}`}>
+                <div className={`row gap-4 ${style.staticsContainer}`}>
                     {/* card 1 */}
-                    <div className={`col-lg-3 col-md-6 col-sm-12 ${style.cookieCard} ${style.cardOne}`}>
+                    <div className={`col-lg-3 col-md-6 col-sm-12 col-12 shadow ${style.cookieCard} ${style.cardOne}`}>
                         <div>
                             <div className="d-flex align-items-center">
                                 <i className="bi bi-people-fill text-light fs-3 me-2"></i>
@@ -80,7 +80,7 @@ const Dashboard = () => {
                         </p>
                     </div>
                     {/* card 2 */}
-                    <div className={`col-lg-3 col-md-6 col-sm-12 ${style.cookieCard} ${style.cardTwo}`}>
+                    <div className={`col-lg-3 col-md-6 col-sm-12 shadow ${style.cookieCard} ${style.cardTwo}`}>
                         <div>
                             <div className="d-flex align-items-center">
                                 <i className="bi bi-broadcast-pin text-light fs-3 me-2"></i>
@@ -94,7 +94,7 @@ const Dashboard = () => {
                         </p>
                     </div>
                     {/* card 3 */}
-                    <div className={`col-lg-3 col-md-6 col-sm-12 ${style.cookieCard} ${style.cardThree}`}>
+                    <div className={`col-lg-3 col-md-6 col-sm-12 shadow ${style.cookieCard} ${style.cardThree}`}>
                         <div>
                             <div className="d-flex align-items-center">
                                 <i className="bi bi-backpack2-fill text-light fs-3 me-2"></i>
@@ -108,7 +108,7 @@ const Dashboard = () => {
                         </p>
                     </div>
                     {/* card 4 */}
-                    <div className={`col-lg-3 col-md-6 col-sm-12 ${style.cookieCard} ${style.card}`}>
+                    <div className={`col-lg-3 col-md-6 col-sm-12 shadow ${style.cookieCard} ${style.card}`}>
                         <div>
                             <div className="d-flex align-items-center">
                                 <i className="bi bi-headset text-light fs-3 me-2"></i>
