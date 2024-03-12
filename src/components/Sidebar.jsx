@@ -29,7 +29,7 @@ const Sidebar = (props) => {
             <div className={`${props.resposiveData} ${style.sidebar} `}>
                 <div className="p-3 d-flex flex-column">
                     <Link to="/dashboard">
-                        <div className={style.sideBarButton}>
+                        <div className={style.sideBarButton} data-bs-dismiss="offcanvas" aria-label="Close">
                             <i className="bi bi-speedometer2 me-3"></i>
                             <span>Dashboard</span>
                         </div>
@@ -37,25 +37,25 @@ const Sidebar = (props) => {
                     <hr />
                     <small className={style.subHeadings}>OTHERS</small>
                     <Link to="/users">
-                        <div className={style.sideBarButton}>
+                        <div className={style.sideBarButton} data-bs-dismiss="offcanvas" aria-label="Close">
                             <i className="bi bi-people me-3"></i>
                             <span>Users</span>
                         </div>
                     </Link>
                     <Link to="/jobs_posts">
-                        <div className={style.sideBarButton}>
+                        <div className={style.sideBarButton} data-bs-dismiss="offcanvas" aria-label="Close">
                             <i className="bi bi-person-workspace me-3"></i>
                             <span>Job posts</span>
                         </div>
                     </Link>
                     <Link to="/services">
-                        <div className={style.sideBarButton}>
+                        <div className={style.sideBarButton} data-bs-dismiss="offcanvas" aria-label="Close">
                             <i className="bi bi-wrench-adjustable-circle me-3"></i>
                             <span>Services</span>
                         </div>
                     </Link>
                     <Link to="/payments">
-                        <div className={style.sideBarButton}>
+                        <div className={style.sideBarButton} data-bs-dismiss="offcanvas" aria-label="Close">
                             <i className="bi bi-credit-card-fill me-3"></i>
                             <span>Payments</span>
                         </div>
