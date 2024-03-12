@@ -27,7 +27,7 @@ const Dashboard = () => {
 
         // get general user  count
         getAllDataOnCondition('users', [
-            { field: 'userType', operator: '==', value: 'vendor' },
+            { field: 'userType', operator: '==', value: 'general_user' },
         ], (data) => {
             setgeneralUserCount(data.length);
         });
@@ -112,7 +112,7 @@ const Dashboard = () => {
                         <div>
                             <div className="d-flex align-items-center">
                                 <i className="bi bi-headset text-light fs-3 me-2"></i>
-                                <span className='fw-bold fs-4 text-light'>{generalUserCount}</span>
+                                <span className='fw-bold fs-4 text-light'>{userCount - generalUserCount}</span>
                             </div>
                             <p className={style.cookieHeading}>Service providers</p>
                         </div>

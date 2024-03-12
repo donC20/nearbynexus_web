@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import style from '../css/userpage.module.css';
 import { banUser, convertToSentenceCase, convertUnixTime, getAllDataOnCondition } from '../components/Apifunction';
-import { doc, setDoc } from 'firebase/firestore';
 import CommonLoader from '../components/commonLoader';
 
 const UserPage = () => {

@@ -14,6 +14,7 @@ import Services from './screens/services.jsx';
 import { fetchDocData } from './components/Apifunction.js';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Payments from './screens/payments.jsx';
 
 function App() {
   const [isLoggedIn, setLoginStatus] = useState(false);
@@ -78,6 +79,7 @@ function App() {
                   <Route path="/jobs_posts" element={<JobPosts />} />
                   <Route path="/proposals/:id" element={<Proposals />} />
                   <Route path="/services" element={<Services />} />
+                  <Route path="/payments" element={<Payments />} />
                 </Routes>
               </div>
             </div>
