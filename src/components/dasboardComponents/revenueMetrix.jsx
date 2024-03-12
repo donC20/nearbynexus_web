@@ -24,15 +24,15 @@ const RevenueMatrix = () => {
                     // Convert Firebase Timestamps to Date objects and format data
                     const newData = data.map(item => ({
                         name: formatDate(item.paymentTime), // Convert Firebase Timestamp to formatted date string
-                        revenue: parseInt(item.commission) // Convert commission to integer
+                        revenue: parseInt(item.applicationRevenue) // Convert commission to integer
                     }));
                     var totalAmount = 0;
 
                     data.forEach((value, index) => {
                         // Check if the value of 'commission' is a valid number
-                        if (!isNaN(value['commission'])) {
+                        if (!isNaN(value['applicationRevenue'])) {
                             // If it's a valid number, parse and add it to the total
-                            totalAmount = totalAmount + parseFloat(value['commission']);
+                            totalAmount = totalAmount + parseFloat(value['applicationRevenue']);
                         }
                     });
 

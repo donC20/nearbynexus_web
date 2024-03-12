@@ -30,12 +30,14 @@ const PaymentLogTable = ({ fnData }) => {
                     const filteredData = newData.filter(item => item !== null);
                     // Calculate total amount paid
                     let totalCount = 0;
+                    let totalCommission = 0;
                     filteredData.forEach(value => {
                         totalCount += parseInt(value.paymentData.amountPaid);
+                        totalCommission += parseInt(value.paymentData.applicationRevenue);
                     });
                     setPaymentData(filteredData);
                     setLoading(false);
-                    fnData(totalCount); // Call fnData with the total amount
+                    fnData(totalCount, totalCommission); // Call fnData with the total amount
                 });
             } catch (error) {
                 console.error('Error fetching payment data:', error);
@@ -115,7 +117,7 @@ const PaymentLogTable = ({ fnData }) => {
                                             </tr>
                                             <tr>
                                                 <th scope="row">Commission</th>
-                                                <td className='text-end'><small>+ <i className="bi bi-currency-rupee"></i>{modalData && modalData.paymentData.commission}</small></td>
+                                                <td className='text-end'><small>+ <i className="bi bi-currency-rupee"></i>{modalData && modalData.paymentData.applicationRevenue}</small></td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">Transaction id</th>
