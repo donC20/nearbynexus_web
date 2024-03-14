@@ -20,6 +20,10 @@ code {
   overflow-x: auto;
 }
 
+.offcanvas {
+  width: max-content !important;
+}
+
 .navContainer {
   background-color: #5046E5 !important;
   height: 56px;

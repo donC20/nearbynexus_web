@@ -3,12 +3,17 @@ import { doc, getDoc, getFirestore } from 'firebase/firestore';
 import { auth } from '../firebase';
 import Sidebar from './Sidebar';
 import { useNavigate } from 'react-router-dom';
+import { getAllDataOnCondition } from './Apifunction';
 
 const Navbar = () => {
     const navigate = useNavigate();
     const db = getFirestore();
     const [userId, setUid] = useState('');
     const [userData, setUserData] = useState(null);
+
+    const [userCount, setUserCount] = useState(0);
+    const [userOnlineCount, setUserOnlineCount] = useState(0);
+    const [generalUserCount, setgeneralUserCount] = useState(0);
 
     useEffect(() => {
         navigate('/dashboard');
@@ -33,6 +38,29 @@ const Navbar = () => {
                 }
             }
         };
+        // get user count
+        getAllDataOnCondition('users', [
+            { field: 'userType', operator: '!=', value: 'admin' },
+            { field: 'status', operator: '==', value: 'active' }
+        ], (data) => {
+            setUserCount(data.length);
+        });
+
+        // get online count
+        getAllDataOnCondition('users', [
+            { field: 'userType', operator: '!=', value: 'admin' },
+            { field: 'status', operator: '==', value: 'active' },
+            { field: 'online', operator: '==', value: true }
+        ], (data) => {
+            setUserOnlineCount(data.length);
+        });
+
+        // get general user  count
+        getAllDataOnCondition('users', [
+            { field: 'userType', operator: '==', value: 'general_user' },
+        ], (data) => {
+            setgeneralUserCount(data.length);
+        });
 
         fetchData();
     }, [db]);
@@ -54,6 +82,7 @@ const Navbar = () => {
                 <div class="offcanvas-body p-0">
                     <div className="userNameData">
                         <div className={`d-flex flex-row gap-1 justify-content-between p-2 align-items-center brandName`}>
+
                             <div>
                                 <img src='/images/logo.png' alt="logo" />
                                 <span>NearbyNexus</span>
@@ -74,10 +103,28 @@ const Navbar = () => {
             {/* nav */}
             <nav className="navContainer position-relative navbar navbar-expand-lg  bg-body-tertiary">
                 <div className="container-fluid">
-                    <button className="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-expanded="false" aria-label="Toggle navigation">
-                        <span className="navbar-toggler-icon"></span>
+                    <button className="navbar-toggler border-white" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="bi bi-list text-light"></i>
                     </button>
                     <div className={`d-flex flex-row gap-1 justify-content-start align-items-center brandName`}>
+                        <div className="d-flex gap-3 d-lg-none">
+                            <div className="d-flex gap-2">
+                                <i className="bi bi-people-fill text-light"></i>
+                                <span className='text-light'>{userCount}</span>
+                            </div>
+                            <div className="d-flex gap-2">
+                                <i className="bi bi-broadcast-pin text-light"></i>
+                                <span className='text-light'>{userOnlineCount}</span>
+                            </div>
+                            <div className="d-flex gap-2">
+                                <i className="bi bi-backpack2-fill text-light"></i>
+                                <span className='text-light'>{generalUserCount}</span>
+                            </div>
+                            <div className="d-flex gap-2">
+                                <i className="bi bi-headset text-light"></i>
+                                <span className='text-light'>{userCount - generalUserCount}</span>
+                            </div>
+                        </div>
                         <img src='/images/logo.png' alt="logo" />
                         <span>NearbyNexus</span>
                     </div>
@@ -93,8 +140,24 @@ const Navbar = () => {
                         {/* right sided options */}
                         <div className="rigthNavSide d-flex flex-lg-row gap-4">
                             <div className="navRightIcons d-flex flex-lg-row gap-4 align-items-center">
-                                <img src="svg/messages-1-svgrepo-com.svg" alt="messages" />
-                                <img src="svg/notofication-2-svgrepo-com.svg" alt="notifications" />
+                                <div className="d-flex gap-3">
+                                    <div className="d-flex gap-2">
+                                        <i className="bi bi-people-fill text-light"></i>
+                                        <span className='text-light'>{userCount}</span>
+                                    </div>
+                                    <div className="d-flex gap-2">
+                                        <i className="bi bi-broadcast-pin text-light"></i>
+                                        <span className='text-light'>{userOnlineCount}</span>
+                                    </div>
+                                    <div className="d-flex gap-2">
+                                        <i className="bi bi-backpack2-fill text-light"></i>
+                                        <span className='text-light'>{generalUserCount}</span>
+                                    </div>
+                                    <div className="d-flex gap-2">
+                                        <i className="bi bi-headset text-light"></i>
+                                        <span className='text-light'>{userCount - generalUserCount}</span>
+                                    </div>
+                                </div>
                             </div>
                             <div className='userAvatatContainer d-flex align-items-center gap-2'>
                                 <span className='text-light'>Welcome, {userName}</span>

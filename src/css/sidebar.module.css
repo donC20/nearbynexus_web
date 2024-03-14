@@ -28,13 +28,14 @@
 }
 
 .sideBarButton:hover {
-    border-radius: 5px;
+        border-radius: 100px;
+
     color: white !important;
     background-color: #5046E5;
 }
 
 .active {
-    border-radius: 5px;
+    border-radius: 100px;
     color: white !important;
     background-color: #5046E5;
 }
