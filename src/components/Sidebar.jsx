@@ -27,7 +27,7 @@ const Sidebar = (props) => {
     return (
         <div>
             <div className={`${props.resposiveData} ${style.sidebar} `}>
-                <div className="p-3 d-flex flex-column">
+                <div className="p-3 d-flex flex-column gap-2">
                     <Link to="/dashboard">
                         <div className={`${style.sideBarButton} ${style[tabIOn == "dashboard" ? 'active' : '']}`} onClick={() => settabIOn('dashboard')} data-bs-dismiss={props.isSmallScreen ? 'offcanvas' : ''} aria-label="Close">
                             <i className="bi bi-speedometer2 me-3"></i>
@@ -62,7 +62,12 @@ const Sidebar = (props) => {
                     </Link>
                     <hr />
                     <small className={style.subHeadings}>ACCOUNT</small>
-
+                    <Link to="/settings">
+                        <div className={`${style.sideBarButton} ${style[tabIOn == "settings" ? 'active' : '']}`} onClick={() => settabIOn('settings')} data-bs-dismiss={props.isSmallScreen ? 'offcanvas' : ''} aria-label="Close">
+                            <i className="bi bi-gear-fill me-3"></i>
+                            <span>Settings</span>
+                        </div>
+                    </Link>
                     <div className={`${style.sideBarButton}`} onClick={handleLogout}>
                         <i className="bi bi-box-arrow-right me-3 text-danger"></i>
                         <span className='text-danger'>Logout</span>

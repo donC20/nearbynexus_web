@@ -124,6 +124,10 @@ const Navbar = () => {
                                 <i className="bi bi-headset text-light"></i>
                                 <span className='text-light'>{userCount - generalUserCount}</span>
                             </div>
+                            <div className="d-flex gap-2">
+                                <i className="bi bi-bell-fill text-light"></i>
+
+                            </div>
                         </div>
                         <img src='/images/logo.png' alt="logo" />
                         <span>NearbyNexus</span>
@@ -156,6 +160,10 @@ const Navbar = () => {
                                     <div className="d-flex gap-2">
                                         <i className="bi bi-headset text-light"></i>
                                         <span className='text-light'>{userCount - generalUserCount}</span>
+                                    </div>
+                                    <div className="d-flex gap-2">
+                                        <i className="bi bi-bell-fill text-light"></i>
+
                                     </div>
                                 </div>
                             </div>

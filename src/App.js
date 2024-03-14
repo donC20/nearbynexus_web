@@ -15,6 +15,7 @@ import { fetchDocData } from './components/Apifunction.js';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Payments from './screens/payments.jsx';
+import Settings from './screens/settings.jsx';
 
 function App() {
   const [isLoggedIn, setLoginStatus] = useState(false);
@@ -83,6 +84,7 @@ function App() {
                   <Route path="/proposals/:id" element={<Proposals />} />
                   <Route path="/services" element={<Services />} />
                   <Route path="/payments" element={<Payments />} />
+                  <Route path="/settings" element={<Settings />} />
                 </Routes>
               </div>
             </div>
