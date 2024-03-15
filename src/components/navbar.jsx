@@ -3,7 +3,7 @@ import { doc, getDoc, getFirestore } from 'firebase/firestore';
 import { auth } from '../firebase';
 import Sidebar from './Sidebar';
 import { useNavigate } from 'react-router-dom';
-import { fetchDocData, getAllDataOnCondition, updateDocsData } from './Apifunction';
+import { fetchDocData, fetchDocDataRealtime, getAllDataOnCondition, updateDocsData } from './Apifunction';
 import CommonLoader from './commonLoader';
 
 const Navbar = () => {
@@ -40,6 +40,38 @@ const Navbar = () => {
             }
         };
 
+        const fetchNewUsersAndJobs = () => {
+            // Fetch app_config to get new_user_list and new_jobs_list
+
+            fetchDocDataRealtime('app_config', 'notifications', (appConfigData) => {
+
+                if (appConfigData) {
+                    const new_user_list = appConfigData.new_users;
+                    const new_jobs_list = appConfigData.new_jobs;
+                    // Fetch new users
+                    new_user_list.forEach(uid => {
+                        fetchDocDataRealtime('users', uid, (userData) => {
+                            if (userData) {
+                                setnotifications(prevNotifications => [...prevNotifications, { type: 'user', data: userData }]);
+                            }
+                        });
+                    });
+
+                    // Fetch new jobs
+                    new_jobs_list.forEach(jobId => {
+                        fetchDocDataRealtime('job_posts', jobId, async (jobData) => {
+                            if (jobData) {
+                                const postedBy = await fetchDocData('users', jobData.jobPostedBy.id);
+                                setnotifications(prevNotifications => [...prevNotifications, { type: 'job', data: jobData, postBy: postedBy }]);
+                            }
+                        });
+                    });
+
+                    // Set notificationLoader to false after fetching
+                    setnotificationLoader(false);
+                }
+            });
+        };
 
 
         // Fetch user counts
@@ -65,9 +97,8 @@ const Navbar = () => {
         });
 
         fetchData();
-        // fetchNewUsersAndJobs().then(notifications => {
-        //     setnotifications(notifications);
-        // });
+        fetchNewUsersAndJobs();
+        console.log('noti data ', notifications);
     }, [db]);
 
     const userName = userData ? userData.name : "user";
@@ -75,43 +106,15 @@ const Navbar = () => {
     console.log(notifications);
 
     // load notifications
-    const fetchNewUsersAndJobs = async () => {
-        setHoverIOn('notifications');
-        const app_config = await fetchDocData('app_config', 'notifications');
-        const new_user_list = app_config.new_users;
-        const new_jobs_list = app_config.new_jobs;
 
-        const newUsers = await Promise.all(new_user_list.map(async (item) => {
-            const userData = await fetchDocData('users', item);
-            return {
-                type: 'user',
-                data: userData,
-            };
-        }));
-
-        const newJobs = await Promise.all(new_jobs_list.map(async (item) => {
-            const jobData = await fetchDocData('job_posts', item);
-            const postedBy = await fetchDocData('users', jobData.jobPostedBy.id);
-            return {
-                type: 'job',
-                data: jobData,
-                postBy: postedBy
-            };
-        }));
-
-        // Combine new users and job posts into a single array
-        const notifications = [...newUsers, ...newJobs];
-
-        // Now, notifications is an array of objects with type and data
-        setnotificationLoader(false);
-        setnotifications(notifications);
-        return notifications;
-    };
 
     const setSeenNotifications = async () => {
         setHoverIOn('')
-        updateDocsData('notifications', 'app_config', { new_jobs: [] })
-        updateDocsData('notifications', 'app_config', { new_users: [] })
+        if (notifications.length >= 10) {
+            setnotifications([])
+            updateDocsData('notifications', 'app_config', { new_jobs: [] })
+            updateDocsData('notifications', 'app_config', { new_users: [] })
+        }
     }
 
     return (
@@ -214,7 +217,8 @@ const Navbar = () => {
                         <div className="d-flex gap-3 d-lg-none">
                             {/* Icon containers */}
                             {/*  */}
-                            <div className={`notificationsWrapper position-relative `} onMouseEnter={fetchNewUsersAndJobs} onMouseLeave={setSeenNotifications}>
+                            <div className={`notificationsWrapper position-relative `} onMouseEnter={() =>
+                                setHoverIOn('notifications')} onMouseLeave={setSeenNotifications}>
                                 <div className="d-flex gap-2">
                                     <i className="bi bi-bell-fill text-light"></i>
                                 </div>
@@ -327,9 +331,16 @@ const Navbar = () => {
                                         </div>
                                     </div>
                                     {/*  */}
-                                    <div className={`notificationsWrapper position-relative `} onMouseEnter={fetchNewUsersAndJobs} onMouseLeave={setSeenNotifications}>
+                                    <div className={`notificationsWrapper position-relative `} onMouseEnter={() =>
+                                        setHoverIOn('notifications')} onMouseLeave={setSeenNotifications}>
                                         <div className="d-flex gap-2">
-                                            <i className="bi bi-bell-fill text-light"></i>
+                                            <i className="bi bi-bell-fill text-light">
+                                                {notifications.length > 0 ?
+                                                    <span class="position-absolute top-0 start-100 translate-middle p-1 bg-danger rounded-circle">
+                                                        <span class="visually-hidden">New alerts</span>
+                                                    </span> : <></>
+                                                }
+                                            </i>
                                         </div>
                                         <div className={`container p-2 bg-white position-absolute rounded shadow notificationsWrapperContainer ${hoverIOn == "notifications" ? 'hovered' : ''}`}>
                                             <small><b>Notifications</b></small>

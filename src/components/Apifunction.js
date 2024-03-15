@@ -114,6 +114,29 @@ const fetchDocData = async (collection, uid) => {
     }
 
 };
+// Set up a real-time listener for a document
+const fetchDocDataRealtime = (collection, uid, callback) => {
+    // Check if uid is provided
+    if (uid) {
+        // Set up the real-time listener
+        const docRef = doc(db, collection, uid);
+        const unsubscribe = onSnapshot(docRef, (docSnap) => {
+            if (docSnap.exists()) {
+                const data = docSnap.data();
+                callback(data); // Call the callback with the document data
+            } else {
+                console.log('No such document!');
+                callback(null); // Call the callback with null if the document does not exist
+            }
+        });
+
+        // Return the unsubscribe function to clean up the listener
+        return unsubscribe;
+    } else {
+        console.log('user not found');
+        return null;
+    }
+};
 
 
 // all servies page
@@ -200,4 +223,4 @@ const isExpired = (timestamp) => {
 };
 
 
-export { banUser, fetchDocData, formatDate, isExpired, deleteDocument, updateDocsData }
+export { banUser, fetchDocData, formatDate, isExpired, deleteDocument, updateDocsData, fetchDocDataRealtime }
