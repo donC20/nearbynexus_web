@@ -82,15 +82,16 @@ code {
 
 
 .hoverActiveContainer {
-  width: 100px;
+  max-width: 300px;
   cursor: pointer;
   display: none;
   right: 0;
   height: max-content;
+  z-index: 1;
   width: max-content;
-  transition:0.5s ease-in-out;
+  transition: 0.5s ease-in-out;
 }
 
-.hoverActiveContainer.hovered{
+.hoverActiveContainer.hovered {
   display: block;
 }

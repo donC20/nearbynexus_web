@@ -97,14 +97,75 @@ const Navbar = () => {
                         <div className="d-flex gap-3 d-lg-none">
                             {/* Icon containers */}
                             <div className={`hoverContainerWrapped position-relative `} onMouseEnter={() => setHoverIOn('people')} onMouseLeave={() => setHoverIOn('')}>
-                                <div className="d-flex gap-2">
-                                    <i className="bi bi-people-fill text-light"></i>
-                                    <span className='text-light'>{userCount}</span>
+                                    <div className="d-flex gap-3">
+                                        <div className={`hoverContainerWrapped position-relative `} onMouseEnter={() => setHoverIOn('people')} onMouseLeave={() => setHoverIOn('')}>
+                                            <div className="d-flex gap-2">
+                                                <i className="bi bi-people-fill text-light"></i>
+                                                <span className='text-light'>{userCount}</span>
+                                            </div>
+                                            <div className={`container p-2 bg-white position-absolute rounded shadow hoverActiveContainer ${hoverIOn == "people" ? 'hovered' : ''}`}>
+                                                <small><b>Total users</b></small>
+                                                <hr className='mt-1 mb-1' />
+                                                <small className='text-secondary'>
+                                                    <i className="bi bi-info-circle me-1 text-secondary"></i>
+                                                    Displays the total user count.
+                                                </small>
+                                            </div>
+                                        </div>
+                                        {/*  */}
+                                        <div className={`hoverContainerWrapped position-relative `} onMouseEnter={() => setHoverIOn('broadcast')} onMouseLeave={() => setHoverIOn('')}>
+                                            <div className="d-flex gap-2">
+                                                <i className="bi bi-broadcast-pin text-light"></i>
+                                                <span className='text-light'>{userOnlineCount}</span>
+                                            </div>
+                                            <div className={`container p-2 bg-white position-absolute rounded shadow hoverActiveContainer ${hoverIOn == "broadcast" ? 'hovered' : ''}`}>
+                                                <small><b>Online Users</b></small>
+                                                <hr className='mt-1 mb-1' />
+                                                <small className='text-secondary'>
+                                                    <i className="bi bi-info-circle me-1 text-secondary"></i>
+                                                    Displays the total online user count.
+                                                </small>
+                                            </div>
+                                        </div>
+
+                                        {/*  */}
+                                        <div className={`hoverContainerWrapped position-relative `} onMouseEnter={() => setHoverIOn('backpack')} onMouseLeave={() => setHoverIOn('')}>
+                                            <div className="d-flex gap-2">
+                                                <i className="bi bi-backpack2-fill text-light"></i>
+                                                <span className='text-light'>{generalUserCount}</span>
+                                            </div>
+                                            <div className={`container p-2 bg-white position-absolute rounded shadow hoverActiveContainer ${hoverIOn == "backpack" ? 'hovered' : ''}`}>
+                                            <small><b>General Users</b></small>
+                                                <hr className='mt-1 mb-1'/>
+                                                <small className='text-secondary'>
+                                                    <i className="bi bi-info-circle me-1 text-secondary"></i>
+                                                    Displays the total count of users who are general to the application.
+                                                </small>
+                                            </div>
+                                        </div>
+
+                                        {/*  */}
+                                        <div className={`hoverContainerWrapped position-relative `} onMouseEnter={() => setHoverIOn('headset')} onMouseLeave={() => setHoverIOn('')}>
+                                            <div className="d-flex gap-2">
+                                                <i className="bi bi-headset text-light"></i>
+                                                <span className='text-light'>{userCount - generalUserCount}</span>
+                                            </div>
+                                            <div className={`container p-2 bg-white position-absolute rounded shadow hoverActiveContainer ${hoverIOn == "headset" ? 'hovered' : ''}`}>
+                                            <small><b>Service providers</b></small>
+                                                <hr className='mt-1 mb-1'/>
+                                                <small className='text-secondary'>
+                                                    <i className="bi bi-info-circle me-1 text-secondary"></i>
+                                                    Displays the total count of users who are provides services to the users.
+                                                </small>
+                                            </div>
+                                        </div>
+                                        {/*  */}
+                                        <div className="d-flex gap-2">
+                                            <i className="bi bi-bell-fill text-light"></i>
+
+                                        </div>
+                                    </div>
                                 </div>
-                                <div className={`container p-2 bg-white position-absolute rounded shadow hoverActiveContainer ${hoverIOn === 'people' ? 'hovered' : ''}`}>
-                                    {/* Add content here */}
-                                </div>
-                            </div>
                             {/* Repeat for other icons */}
                         </div>
                         <img src='/images/logo.png' alt="logo" />
@@ -124,7 +185,7 @@ const Navbar = () => {
                                                 <span className='text-light'>{userCount}</span>
                                             </div>
                                             <div className={`container p-2 bg-white position-absolute rounded shadow hoverActiveContainer ${hoverIOn == "people" ? 'hovered' : ''}`}>
-                                                <small><b>Total users count</b></small>
+                                                <small><b>Total users</b></small>
                                                 <hr className='mt-1 mb-1' />
                                                 <small className='text-secondary'>
                                                     <i className="bi bi-info-circle me-1 text-secondary"></i>
@@ -139,7 +200,7 @@ const Navbar = () => {
                                                 <span className='text-light'>{userOnlineCount}</span>
                                             </div>
                                             <div className={`container p-2 bg-white position-absolute rounded shadow hoverActiveContainer ${hoverIOn == "broadcast" ? 'hovered' : ''}`}>
-                                                <small><b>Total users online</b></small>
+                                                <small><b>Online Users</b></small>
                                                 <hr className='mt-1 mb-1' />
                                                 <small className='text-secondary'>
                                                     <i className="bi bi-info-circle me-1 text-secondary"></i>
@@ -155,11 +216,11 @@ const Navbar = () => {
                                                 <span className='text-light'>{generalUserCount}</span>
                                             </div>
                                             <div className={`container p-2 bg-white position-absolute rounded shadow hoverActiveContainer ${hoverIOn == "backpack" ? 'hovered' : ''}`}>
-                                            <small><b>Total users count</b></small>
+                                            <small><b>General Users</b></small>
                                                 <hr className='mt-1 mb-1'/>
                                                 <small className='text-secondary'>
                                                     <i className="bi bi-info-circle me-1 text-secondary"></i>
-                                                    Displays the total user count.
+                                                    Displays the total count of users who are general to the application.
                                                 </small>
                                             </div>
                                         </div>
@@ -171,11 +232,11 @@ const Navbar = () => {
                                                 <span className='text-light'>{userCount - generalUserCount}</span>
                                             </div>
                                             <div className={`container p-2 bg-white position-absolute rounded shadow hoverActiveContainer ${hoverIOn == "headset" ? 'hovered' : ''}`}>
-                                            <small><b>Total users count</b></small>
+                                            <small><b>Service providers</b></small>
                                                 <hr className='mt-1 mb-1'/>
                                                 <small className='text-secondary'>
                                                     <i className="bi bi-info-circle me-1 text-secondary"></i>
-                                                    Displays the total user count.
+                                                    Displays the total count of users who are provides services to the users.
                                                 </small>
                                             </div>
                                         </div>
