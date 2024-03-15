@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import style from '../css/userpage.module.css';
 import { banUser, convertToSentenceCase, convertUnixTime, getAllDataOnCondition } from '../components/Apifunction';
 import CommonLoader from '../components/commonLoader';
+import { utils, writeFile } from 'xlsx';
+
 
 const UserPage = () => {
     const [users, setUsers] = useState([]);
@@ -36,6 +38,35 @@ const UserPage = () => {
         setFilteredUsers(filtered);
         setLoading(false)
     };
+    const printToXls = async () => {
+        // Create a new workbook
+        const wb = utils.book_new();
+        var dataToPrint = [];
+        filteredUsers.forEach((item) => {
+            // Push each user object into the dataToPrint array
+            dataToPrint.push({
+                Name: item.name,
+                Email: item.emailId['id'] ?? '',
+                Phone: item.phone['number'],
+                Location: item.geoLocation,
+                Status: item.status,
+                User_Type: item.userType
+                // Add other fields as needed
+            });
+        });
+
+        // Convert the dataToPrint array to a worksheet
+        const ws = utils.json_to_sheet(dataToPrint);
+
+        // Add the worksheet to the workbook
+        utils.book_append_sheet(wb, ws, 'Users');
+
+        // Write the workbook to a file
+        // This example writes to a file named 'users.xlsx' in the current directory
+        writeFile(wb, 'users.xlsx');
+    }
+
+
     return (
         <div className="container p-4 ">
             <div className="d-flex flex-column justify-content-start">
@@ -52,9 +83,12 @@ const UserPage = () => {
                 <CommonLoader />
             </div> :
                 <div className="p-4 bg-white rounded shadow">
-                    <div className="d-flex flex-column gap-2">
-                        <b className=''><i className="bi bi-people-fill me-2"></i>All Users</b>
-                        <small className='text-secondary'><b>{filteredUsers.length}</b> Registered users.</small>
+                    <div className="d-flex justify-content-between align-items-center">
+                        <div className="d-flex flex-column gap-2">
+                            <b className=''><i className="bi bi-people-fill me-2"></i>All Users</b>
+                            <small className='text-secondary'><b>{filteredUsers.length}</b> Registered users.</small>
+                        </div>
+                        <button className='btn btn-success' onClick={printToXls}>Download</button>
                     </div>
 
                     <div className="table-responsive">

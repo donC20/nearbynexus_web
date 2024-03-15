@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import style from '../../css/dashboard.module.css';
-import {convertToSentenceCase, getAllDataOnCondition } from '../Apifunction';
+import { convertToSentenceCase, getAllDataOnCondition } from '../Apifunction';
 
 const ServicesUsage = () => {
     const [serviceCounts, setServiceCounts] = useState({});
@@ -58,10 +58,12 @@ const ServicesUsage = () => {
                                 <th scope="row">{index + 1}</th>
                                 <td>{convertToSentenceCase(service)}</td>
                                 <td>
-                                    <div className="d-flex align-items-center gap-3">
+                                    <small><b>{count}</b> Users registerd & provides this service.</small>
+
+                                    {/* <div className="d-flex align-items-center gap-3">
                                         <small>{count}</small>
                                         <progress className={style.progressBar} value={count} max={10}></progress>
-                                    </div>
+                                    </div> */}
                                 </td>
                             </tr>
                         ))}

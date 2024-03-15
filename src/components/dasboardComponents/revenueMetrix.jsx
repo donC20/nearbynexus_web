@@ -3,6 +3,7 @@ import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContai
 import style from '../../css/dashboard.module.css';
 import { formatDate, getAllDataOnCondition } from '../Apifunction';
 import CommonLoader from '../commonLoader';
+import { utils, writeFile } from 'xlsx';
 
 const RevenueMatrix = () => {
     const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth() + 1);
@@ -10,6 +11,7 @@ const RevenueMatrix = () => {
     const [totalRevenue, setTotalRevenue] = useState(0);
     const [convertedData, setConvertedData] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [printableData, setprintableData] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -22,6 +24,7 @@ const RevenueMatrix = () => {
                     { field: 'paymentTime', operator: '<=', value: lastDayOfMonth }
                 ], (data) => {
                     // Convert Firebase Timestamps to Date objects and format data
+                    setprintableData(data)
                     const newData = data.map(item => ({
                         name: formatDate(item.paymentTime), // Convert Firebase Timestamp to formatted date string
                         revenue: parseInt(item.applicationRevenue) // Convert commission to integer
@@ -50,7 +53,35 @@ const RevenueMatrix = () => {
         fetchData();
     }, [selectedMonth, selectedYear]);
 
+    const printData = async () => {
+        console.log(printableData);
+        const wb = utils.book_new();
+        var dataToPrint = [];
+        printableData.forEach((item) => {
+            // Push each user object into the dataToPrint array
+            dataToPrint.push({
+                PaymentId: item.id,
+                JobId: item.jobId.id ?? '',
+                PayedFor: item.payedFor,
+                Revenue: item.applicationRevenue,
+                Payed: item.amountPaid,
+                PayedTo: item.payedTo.id,
+                PayedBy: item.payedBy.id,
+                PayedOn: formatDate(item.paymentTime)
+                // Add other fields as needed
+            });
+        });
 
+        // Convert the dataToPrint array to a worksheet
+        const ws = utils.json_to_sheet(dataToPrint);
+
+        // Add the worksheet to the workbook
+        utils.book_append_sheet(wb, ws, 'revenueData');
+
+        // Write the workbook to a file
+        // This example writes to a file named 'users.xlsx' in the current directory
+        writeFile(wb, 'revenueData.xlsx');
+    }
 
     return (
         <div className="col p-4 rounded bg-white shadow">
@@ -68,6 +99,9 @@ const RevenueMatrix = () => {
                                 <option key={year} value={year}>{year}</option>
                             ))}
                         </select>
+                        {convertedData.length > 0 ?
+                            <button className='p-1 rounded btn btn-transparent border' onClick={printData}><small className='d-flex gap-2 '><i className="bi bi-printer-fill"></i>Export</small></button>
+                            : <></>}
                     </div>
                 </div>
                 <div>

@@ -3,7 +3,7 @@ import { doc, getDoc, getFirestore } from 'firebase/firestore';
 import { auth } from '../firebase';
 import Sidebar from './Sidebar';
 import { useNavigate } from 'react-router-dom';
-import { fetchDocData, getAllDataOnCondition } from './Apifunction';
+import { fetchDocData, getAllDataOnCondition, updateDocsData } from './Apifunction';
 import CommonLoader from './commonLoader';
 
 const Navbar = () => {
@@ -108,6 +108,12 @@ const Navbar = () => {
         return notifications;
     };
 
+    const setSeenNotifications = async () => {
+        setHoverIOn('')
+        updateDocsData('notifications', 'app_config', { new_jobs: [] })
+        updateDocsData('notifications', 'app_config', { new_users: [] })
+    }
+
     return (
         <div>
             {/* Offcanvas */}
@@ -208,9 +214,44 @@ const Navbar = () => {
                         <div className="d-flex gap-3 d-lg-none">
                             {/* Icon containers */}
                             {/*  */}
-                            <div className="d-flex gap-2 me-2">
-                                <i className="bi bi-bell-fill text-light"></i>
+                            <div className={`notificationsWrapper position-relative `} onMouseEnter={fetchNewUsersAndJobs} onMouseLeave={setSeenNotifications}>
+                                <div className="d-flex gap-2">
+                                    <i className="bi bi-bell-fill text-light"></i>
+                                </div>
+                                <div className={`container p-2 bg-white position-absolute rounded shadow notificationsWrapperContainer ${hoverIOn == "notifications" ? 'hovered' : ''}`}>
+                                    <small><b>Notifications</b></small>
+                                    <hr className='mt-1 mb-1' />
+                                    {notificationLoader ?
+                                        <div className='d-flex justify-content-center align-items-center'>
+                                            <CommonLoader />
+                                        </div> :
+                                        <div className="d-flex flex-column">
+                                            <div>
 
+                                                {notifications.length > 0 ? notifications.map((item, index) => {
+                                                    if (item.type === 'user') {
+                                                        return (
+                                                            <div className="d-flex p-2 gap-2" key={index}>
+                                                                <img src={item.data.image} className='rounded-circle' alt="" />
+                                                                <small><b>{item.data.name} </b> joined the platform</small>
+                                                            </div>
+
+                                                        );
+                                                    } else if (item.type === 'job') {
+                                                        return (
+
+                                                            <div className="d-flex p-2 gap-2" key={index}>
+                                                                <small><b>{item.postBy.name}</b> posted new <b>{item.data.jobTitle}</b> job</small>
+
+                                                            </div>
+
+                                                        );
+                                                    }
+                                                    return null; // This should not happen, but it's a good practice to return null for unrecognized types
+                                                }) : <div><small className='d-flex justify-content-center align-items-center'>No new notifications!</small></div>}
+                                            </div>
+                                        </div>}
+                                </div>
                             </div>
                             {/* Repeat for other icons */}
                         </div>
@@ -286,7 +327,7 @@ const Navbar = () => {
                                         </div>
                                     </div>
                                     {/*  */}
-                                    <div className={`notificationsWrapper position-relative `} onMouseEnter={() => fetchNewUsersAndJobs()} onMouseLeave={() => setHoverIOn('')}>
+                                    <div className={`notificationsWrapper position-relative `} onMouseEnter={fetchNewUsersAndJobs} onMouseLeave={setSeenNotifications}>
                                         <div className="d-flex gap-2">
                                             <i className="bi bi-bell-fill text-light"></i>
                                         </div>
