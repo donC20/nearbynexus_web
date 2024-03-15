@@ -96,3 +96,25 @@ code {
 .hoverActiveContainer.hovered {
   display: block;
 }
+
+.notificationsWrapperContainer {
+  max-width: 300px;
+  max-height: 300px;
+  overflow: auto;
+  cursor: pointer;
+  display: none;
+  right: 0;
+  height: max-content;
+  position: absolute;
+  z-index: 1;
+  width: 300px;
+  transition: 0.5s ease-in-out;
+}
+
+.notificationView.hovered {
+  display: block;
+}
+
+.notificationsWrapperContainer.hovered {
+  display: block;
+}
