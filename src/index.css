@@ -70,7 +70,8 @@ code {
 
 /* nav offcanvas */
 .userNameData {
-  height: 200px;
+  height: max-content;
+  padding: 4%;
   background-color: #5046E5;
 }
 
