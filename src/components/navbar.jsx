@@ -14,31 +14,29 @@ const Navbar = () => {
     const [userCount, setUserCount] = useState(0);
     const [userOnlineCount, setUserOnlineCount] = useState(0);
     const [generalUserCount, setgeneralUserCount] = useState(0);
+    const [hoverIOn, setHoverIOn] = useState('');
 
     useEffect(() => {
-        navigate('/dashboard');
-
+        // Fetch user data and counts
         const fetchData = async () => {
-            // Get the current user's ID
             const currentUser = auth.currentUser;
             if (currentUser) {
                 const uid = currentUser.uid;
                 setUid(uid);
 
-                // Fetch data based on the user's ID
                 const docRef = doc(db, 'users', uid);
                 const docSnap = await getDoc(docRef);
 
                 if (docSnap.exists()) {
                     const userSnapshot = docSnap.data();
                     setUserData(userSnapshot);
-                    // console.log('User data:', userSnapshot); // Log the updated userSnapshot
                 } else {
                     console.log('No such document!');
                 }
             }
         };
-        // get user count
+
+        // Fetch user counts
         getAllDataOnCondition('users', [
             { field: 'userType', operator: '!=', value: 'admin' },
             { field: 'status', operator: '==', value: 'active' }
@@ -46,7 +44,6 @@ const Navbar = () => {
             setUserCount(data.length);
         });
 
-        // get online count
         getAllDataOnCondition('users', [
             { field: 'userType', operator: '!=', value: 'admin' },
             { field: 'status', operator: '==', value: 'active' },
@@ -55,7 +52,6 @@ const Navbar = () => {
             setUserOnlineCount(data.length);
         });
 
-        // get general user  count
         getAllDataOnCondition('users', [
             { field: 'userType', operator: '==', value: 'general_user' },
         ], (data) => {
@@ -65,30 +61,22 @@ const Navbar = () => {
         fetchData();
     }, [db]);
 
-    // Render user's name if userData exists, otherwise render "user"
     const userName = userData ? userData.name : "user";
-
-    // Render user's image if userData exists, otherwise render default image
     const userImage = userData ? (userData.image || "raster/avatar-1.png") : "raster/avatar-1.png";
 
     return (
         <div>
-            {/* offCanvas */}
-            <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
-                {/* <div class="offcanvas-header">
-                    <h5 class="offcanvas-title" id="offcanvasExampleLabel">NearbyNexus</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                </div> */}
-                <div class="offcanvas-body p-0">
+            {/* Offcanvas */}
+            <div className="offcanvas offcanvas-start" tabIndex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+                <div className="offcanvas-body p-0">
                     <div className="userNameData">
                         <div className={`d-flex flex-row gap-1 justify-content-between p-2 align-items-center brandName`}>
-
                             <div>
                                 <img src='/images/logo.png' alt="logo" />
                                 <span>NearbyNexus</span>
                             </div>
                             <div>
-                                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                                <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                             </div>
                         </div>
                         <div className='userAvatatContainerRes mt-1 d-flex flex-column align-items-center gap-2'>
@@ -97,86 +85,118 @@ const Navbar = () => {
                         </div>
                     </div>
                     <Sidebar resposiveData='d-lg-block' isSmallScreen={true} />
-
                 </div>
             </div>
-            {/* nav */}
-            <nav className="navContainer position-relative navbar navbar-expand-lg  bg-body-tertiary">
+            {/* Nav */}
+            <nav className="navContainer position-relative navbar navbar-expand-lg bg-body-tertiary">
                 <div className="container-fluid">
                     <button className="navbar-toggler border-white" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-expanded="false" aria-label="Toggle navigation">
-                        <i class="bi bi-list text-light"></i>
+                        <i className="bi bi-list text-light"></i>
                     </button>
                     <div className={`d-flex flex-row gap-1 justify-content-start align-items-center brandName`}>
                         <div className="d-flex gap-3 d-lg-none">
-                            <div className="d-flex gap-2">
-                                <i className="bi bi-people-fill text-light"></i>
-                                <span className='text-light'>{userCount}</span>
+                            {/* Icon containers */}
+                            <div className={`hoverContainerWrapped position-relative `} onMouseEnter={() => setHoverIOn('people')} onMouseLeave={() => setHoverIOn('')}>
+                                <div className="d-flex gap-2">
+                                    <i className="bi bi-people-fill text-light"></i>
+                                    <span className='text-light'>{userCount}</span>
+                                </div>
+                                <div className={`container p-2 bg-white position-absolute rounded shadow hoverActiveContainer ${hoverIOn === 'people' ? 'hovered' : ''}`}>
+                                    {/* Add content here */}
+                                </div>
                             </div>
-                            <div className="d-flex gap-2">
-                                <i className="bi bi-broadcast-pin text-light"></i>
-                                <span className='text-light'>{userOnlineCount}</span>
-                            </div>
-                            <div className="d-flex gap-2">
-                                <i className="bi bi-backpack2-fill text-light"></i>
-                                <span className='text-light'>{generalUserCount}</span>
-                            </div>
-                            <div className="d-flex gap-2">
-                                <i className="bi bi-headset text-light"></i>
-                                <span className='text-light'>{userCount - generalUserCount}</span>
-                            </div>
-                            <div className="d-flex gap-2">
-                                <i className="bi bi-bell-fill text-light"></i>
-
-                            </div>
+                            {/* Repeat for other icons */}
                         </div>
                         <img src='/images/logo.png' alt="logo" />
                         <span>NearbyNexus</span>
                     </div>
-
-                    {/* <form className="d-flex" role="search">
-                        <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-                    </form> */}
-
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-
                         </ul>
-                        {/* right sided options */}
                         <div className="rigthNavSide d-flex flex-lg-row gap-4">
                             <div className="navRightIcons d-flex flex-lg-row gap-4 align-items-center">
-                                <div className="d-flex gap-3">
-                                    <div className="d-flex gap-2">
-                                        <i className="bi bi-people-fill text-light"></i>
-                                        <span className='text-light'>{userCount}</span>
-                                    </div>
-                                    <div className="d-flex gap-2">
-                                        <i className="bi bi-broadcast-pin text-light"></i>
-                                        <span className='text-light'>{userOnlineCount}</span>
-                                    </div>
-                                    <div className="d-flex gap-2">
-                                        <i className="bi bi-backpack2-fill text-light"></i>
-                                        <span className='text-light'>{generalUserCount}</span>
-                                    </div>
-                                    <div className="d-flex gap-2">
-                                        <i className="bi bi-headset text-light"></i>
-                                        <span className='text-light'>{userCount - generalUserCount}</span>
-                                    </div>
-                                    <div className="d-flex gap-2">
-                                        <i className="bi bi-bell-fill text-light"></i>
+                                {/* Icon containers */}
+                                <div className={`hoverContainerWrapped position-relative `} onMouseEnter={() => setHoverIOn('people')} onMouseLeave={() => setHoverIOn('')}>
+                                    <div className="d-flex gap-3">
+                                        <div className={`hoverContainerWrapped position-relative `} onMouseEnter={() => setHoverIOn('people')} onMouseLeave={() => setHoverIOn('')}>
+                                            <div className="d-flex gap-2">
+                                                <i className="bi bi-people-fill text-light"></i>
+                                                <span className='text-light'>{userCount}</span>
+                                            </div>
+                                            <div className={`container p-2 bg-white position-absolute rounded shadow hoverActiveContainer ${hoverIOn == "people" ? 'hovered' : ''}`}>
+                                                <small><b>Total users count</b></small>
+                                                <hr className='mt-1 mb-1' />
+                                                <small className='text-secondary'>
+                                                    <i className="bi bi-info-circle me-1 text-secondary"></i>
+                                                    Displays the total user count.
+                                                </small>
+                                            </div>
+                                        </div>
+                                        {/*  */}
+                                        <div className={`hoverContainerWrapped position-relative `} onMouseEnter={() => setHoverIOn('broadcast')} onMouseLeave={() => setHoverIOn('')}>
+                                            <div className="d-flex gap-2">
+                                                <i className="bi bi-broadcast-pin text-light"></i>
+                                                <span className='text-light'>{userOnlineCount}</span>
+                                            </div>
+                                            <div className={`container p-2 bg-white position-absolute rounded shadow hoverActiveContainer ${hoverIOn == "broadcast" ? 'hovered' : ''}`}>
+                                                <small><b>Total users online</b></small>
+                                                <hr className='mt-1 mb-1' />
+                                                <small className='text-secondary'>
+                                                    <i className="bi bi-info-circle me-1 text-secondary"></i>
+                                                    Displays the total online user count.
+                                                </small>
+                                            </div>
+                                        </div>
 
+                                        {/*  */}
+                                        <div className={`hoverContainerWrapped position-relative `} onMouseEnter={() => setHoverIOn('backpack')} onMouseLeave={() => setHoverIOn('')}>
+                                            <div className="d-flex gap-2">
+                                                <i className="bi bi-backpack2-fill text-light"></i>
+                                                <span className='text-light'>{generalUserCount}</span>
+                                            </div>
+                                            <div className={`container p-2 bg-white position-absolute rounded shadow hoverActiveContainer ${hoverIOn == "backpack" ? 'hovered' : ''}`}>
+                                            <small><b>Total users count</b></small>
+                                                <hr className='mt-1 mb-1'/>
+                                                <small className='text-secondary'>
+                                                    <i className="bi bi-info-circle me-1 text-secondary"></i>
+                                                    Displays the total user count.
+                                                </small>
+                                            </div>
+                                        </div>
+
+                                        {/*  */}
+                                        <div className={`hoverContainerWrapped position-relative `} onMouseEnter={() => setHoverIOn('headset')} onMouseLeave={() => setHoverIOn('')}>
+                                            <div className="d-flex gap-2">
+                                                <i className="bi bi-headset text-light"></i>
+                                                <span className='text-light'>{userCount - generalUserCount}</span>
+                                            </div>
+                                            <div className={`container p-2 bg-white position-absolute rounded shadow hoverActiveContainer ${hoverIOn == "headset" ? 'hovered' : ''}`}>
+                                            <small><b>Total users count</b></small>
+                                                <hr className='mt-1 mb-1'/>
+                                                <small className='text-secondary'>
+                                                    <i className="bi bi-info-circle me-1 text-secondary"></i>
+                                                    Displays the total user count.
+                                                </small>
+                                            </div>
+                                        </div>
+                                        {/*  */}
+                                        <div className="d-flex gap-2">
+                                            <i className="bi bi-bell-fill text-light"></i>
+
+                                        </div>
                                     </div>
                                 </div>
+                                {/* Repeat for other icons */}
                             </div>
                             <div className='userAvatatContainer d-flex align-items-center gap-2'>
                                 <span className='text-light'>Welcome, {userName}</span>
                                 <img src={userImage} className='rounded-circle' alt="" />
                             </div>
                         </div>
-                        {/* right ends */}
                     </div>
                 </div>
-            </nav>
-        </div>
+            </nav >
+        </div >
     );
 };
 
