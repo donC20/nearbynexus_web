@@ -118,7 +118,7 @@ const UserPage = () => {
                                         <td><button className='btn btn-transparent border-0' data-bs-toggle="modal" data-bs-target="#infoModal" onClick={() => handleInfoClick(user)}><i className="bi bi-info-circle"></i></button></td>
                                         <td>
                                             {user.status == "active" ?
-                                                <button className={style.banUserBtn} onClick={() => banUser(user.id, 'disabled')}>Ban user</button>
+                                                <button className={style.banUserBtn} id={`user_banButton_${index}`} onClick={() => banUser(user.id, 'disabled')}>Ban user</button>
                                                 :
                                                 <button className={style.unBanUserBtn} onClick={() => banUser(user.id, 'active')}>Unban user</button>
                                             }

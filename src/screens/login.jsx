@@ -51,7 +51,7 @@ const Login = () => {
             } catch (error) {
                 setloading(false)
                 setIsSigningIn(false);
-                
+
                 // Handle sign-in error
                 if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password') {
                     setSignInError('Invalid email or password');
@@ -101,6 +101,7 @@ const Login = () => {
                                 <i className="bi bi-person-fill"></i>
                                 <input
                                     type="text"
+                                    id='email_feild'
                                     placeholder="Username"
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
@@ -114,6 +115,7 @@ const Login = () => {
                                 <input
                                     type="password"
                                     placeholder="Password"
+                                    id='password_field'
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
                                 />
@@ -126,6 +128,7 @@ const Login = () => {
                         </div> : <input
                             type="submit"
                             value="Login"
+                            id='submit_btn'
                             className={`${style.btn} ${style.solid}`}
                             disabled={isSigningIn}
                         />}

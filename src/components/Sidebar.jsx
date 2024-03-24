@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import style from '../css/sidebar.module.css';
 import { Link, useNavigate } from 'react-router-dom'; // Import useNavigate
 import { auth } from '../firebase';
@@ -8,6 +8,13 @@ const Sidebar = (props) => {
     const navigate = useNavigate(); // Get the navigate function
     const [signoutLoading, setSignoutLoading] = useState(false);
     const [tabIOn, settabIOn] = useState('dashboard');
+
+    useEffect(() => {
+        // Scroll the sidebar into view if it's not fully visible
+        const sidebar = document.querySelector(`.${style.sidebar}`);
+        if (sidebar) sidebar.scrollIntoView({ behavior: 'smooth' });
+    }, []);
+
     const handleLogout = async () => {
         try {
             setSignoutLoading(true);
@@ -37,7 +44,7 @@ const Sidebar = (props) => {
                     <hr />
                     <small className={style.subHeadings}>OTHERS</small>
                     <Link to="/users">
-                        <div className={`${style.sideBarButton} ${style[tabIOn == "users" ? 'active' : '']}`} onClick={() => settabIOn('users')} data-bs-dismiss={props.isSmallScreen ? 'offcanvas' : ''} aria-label="Close">
+                        <div className={`${style.sideBarButton} ${style[tabIOn == "users" ? 'active' : '']}`} id='user_tab' onClick={() => settabIOn('users')} data-bs-dismiss={props.isSmallScreen ? 'offcanvas' : ''} aria-label="Close">
                             <i className="bi bi-people me-3"></i>
                             <span>Users</span>
                         </div>
