@@ -3,6 +3,9 @@ import '../css/style.css'
 import AppScreenshotSlider from '../components/appScreenSlider'
 
 const Home = () => {
+    function downloadApp() {
+        window.open("https://nearbynexusblob.blob.core.windows.net/nearbynexus-blobstore/NearbyNexus%20v1.0.0.apk", "_blank");
+    }
     return (
         <div>
             {/* Start Header*/}
@@ -32,7 +35,7 @@ const Home = () => {
 
                                     <div className="mu-app-download-area">
                                         <h4>Download The App</h4>
-                                        <a className="mu-google-btn" href="#"><i className="fa fa-android"></i><span>Download Now</span></a>
+                                        <a onClick={downloadApp} className="mu-google-btn" href="#"><i className="fa fa-android"></i><span>Download Now</span></a>
                                         {/* <a className="mu-windows-btn" href="#"><i className="fa fa-windows"></i><span>windows store</span></a>*/}
                                     </div>
 
@@ -195,10 +198,10 @@ const Home = () => {
                 {/* End Video*/}
 
                 {/* Start Apps Screenshot*/}
-                   <AppScreenshotSlider/>
+                <AppScreenshotSlider />
                 {/* End Apps Screenshot*/}
 
-                
+
 
                 {/* Start FAQ*/}
                 <section id="mu-faq">
