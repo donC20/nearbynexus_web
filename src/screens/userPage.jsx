@@ -88,7 +88,7 @@ const UserPage = () => {
                             <b className=''><i className="bi bi-people-fill me-2"></i>All Users</b>
                             <small className='text-secondary'><b>{filteredUsers.length}</b> Registered users.</small>
                         </div>
-                        <button className='btn btn-success' onClick={printToXls}>Download</button>
+                        <button id='download_as_xl' className='btn btn-success' onClick={printToXls}>Download</button>
                     </div>
 
                     <div className="table-responsive">

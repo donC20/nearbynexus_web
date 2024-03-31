@@ -16,6 +16,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Payments from './screens/payments.jsx';
 import Settings from './screens/settings.jsx';
+import Home from './screens/home.jsx';
 
 function App() {
   const [isLoggedIn, setLoginStatus] = useState(false);
@@ -66,7 +67,8 @@ function App() {
       <div>
         <Routes>
           {/* Only render the login route if the user is not logged in */}
-          {!isLoggedIn && <Route path="/" element={<Login />} />}
+          {<Route path="/" element={<Home />} />}
+          {!isLoggedIn && <Route path="/login" element={<Login />} />}
         </Routes>
         {isLoggedIn && (
           <div>

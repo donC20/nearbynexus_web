@@ -33,29 +33,6 @@ const Dashboard = () => {
         });
     }, []);
 
-    // Empty dependency array ensures this effect runs only once on mount
-
-    // generate random color
-    // const [progressValue, setProgressValue] = useState(500); // Initial progress value
-    // const [maxValue, setMaxValue] = useState(1000); // Initial maximum value
-
-    // useEffect(() => {
-    //     // Generate random colors for the progress bar
-    //     const color1 = generateRandomColor();
-    //     const color2 = generateRandomColor();
-
-    //     // Update progress bar colors
-    //     const progressBar = document.querySelector('.progressBar');
-    //     if (progressBar) {
-    //         progressBar.style.backgroundImage = `linear-gradient(45deg, ${color1}, ${color2})`;
-    //     }
-    // }, [progressValue, maxValue]); // Trigger the effect whenever progressValue or maxValue changes
-
-    // // Function to generate a random hexadecimal color
-    // const generateRandomColor = () => {
-    //     return '#' + Math.floor(Math.random() * 16777215).toString(16);
-    // };
-
     return (
         <div className={style.dashboard}>
             <div className="container p-4">

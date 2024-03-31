@@ -74,7 +74,7 @@ const AddServices = () => {
                             }}
                         />
                         {isServiceNameValid && (
-                            <button className='btn btn-transparent me-2' onClick={addService}><i className="bi bi-plus-circle-fill"></i></button>
+                            <button id='add_service_btn' className='btn btn-transparent me-2' onClick={addService}><i className="bi bi-plus-circle-fill"></i></button>
                         )}
                     </div>
                     {!isServiceNameValid ?
@@ -103,7 +103,7 @@ const AddServices = () => {
                 </div>
                 <div className="d-flex justify-content-end">
                     {submitLoader ? <button className='btn btn-primary'>Please wait..</button> :
-                        <button disabled={stagedServices.length <= 0} className='btn btn-primary' onClick={handleUpdateService}>
+                        <button id='publish_btn' disabled={stagedServices.length <= 0} className='btn btn-primary' onClick={handleUpdateService}>
                             <i className="bi bi-check-circle-fill me-2"></i>Publish
                         </button>
                     }

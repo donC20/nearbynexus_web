@@ -81,9 +81,9 @@ const JobTable = () => {
                                         </td>
                                         <td>{formatDate(data.jobData.jobPostDate)}</td>
                                         <td>
-                                            <i className={`bi bi-${!data.jobData.status.isActive ? 'ban' : data.jobData.warning.isWarned ? 'exclamation-triangle' : isExpired(data.jobData.expiryDate) ? 'hourglass' : data.jobData.isWithdrawn ? 'x-octagon' : 'check-lg'} me-2`}></i>
+                                            <i className={`bi bi-${!data.jobData.status.isActive ? 'ban' :  isExpired(data.jobData.expiryDate) ? 'hourglass' : data.jobData.isWithdrawn ? 'x-octagon' : 'check-lg'} me-2`}></i>
 
-                                            {!data.jobData.status.isActive ? 'Disabled' : data.jobData.warning.isWarned ? 'Warned' : isExpired(data.jobData.expiryDate) ? 'Expired' : data.jobData.isWithdrawn ? 'Withdrawn' : 'Active'}</td>
+                                            {!data.jobData.status.isActive ? 'Disabled' : isExpired(data.jobData.expiryDate) ? 'Expired' : data.jobData.isWithdrawn ? 'Withdrawn' : 'Active'}</td>
                                         <td>
                                             <button className={`btn btn-transparent border-0 ${style['accordion-button']}`} data-bs-toggle="collapse" data-bs-target={`#collapse${index}`} aria-expanded="false" aria-controls={`collapse${index}`} onClick={() => toggleCollapse(index)}>
                                                 <i className={`bi ${collapseStates[index] ? 'bi-chevron-up' : 'bi-chevron-down'}`}></i>
@@ -101,11 +101,11 @@ const JobTable = () => {
                                                         :
                                                         <li data-bs-toggle="modal" data-bs-target="#confirmationbox" onClick={() => openConfirmModelModal(data.jobData.id, 'active')}><Link><small className="dropdown-item"><i className="bi bi-hand-thumbs-up me-2"></i>Enable</small></Link></li>
                                                     }
-                                                    {!data.jobData.warning.isWarned ?
+                                                    {/* {!data.jobData.warning.isWarned ?
                                                         <li data-bs-toggle="modal" data-bs-target="#confirmationbox" onClick={() => openConfirmModelModal(data.jobData.id, 'warn')}><Link><small className="dropdown-item"><i className="bi bi-exclamation-triangle me-2"></i>Send warning</small></Link></li>
                                                         :
                                                         <li data-bs-toggle="modal" data-bs-target="#confirmationbox" onClick={() => openConfirmModelModal(data.jobData.id, 'unwarn')}><Link><small className="dropdown-item"><i className="bi bi-arrow-repeat me-2"></i>Unwarn</small></Link></li>
-                                                    }
+                                                    } */}
                                                 </ul>
 
                                             </div>
@@ -166,22 +166,22 @@ const JobTable = () => {
                                                 }
                                             });
                                             break; // Added break statement
-                                        case 'warn':
-                                            updateDocsData(jobId, 'job_posts', {
-                                                warning: {
-                                                    isWarned: true,
-                                                    reason: ""
-                                                }
-                                            });
-                                            break; // Added break statement
-                                        case 'unwarn':
-                                            updateDocsData(jobId, 'job_posts', {
-                                                warning: {
-                                                    isWarned: false,
-                                                    reason: ""
-                                                }
-                                            });
-                                            break; // Added break statement
+                                        // case 'warn':
+                                        //     updateDocsData(jobId, 'job_posts', {
+                                        //         warning: {
+                                        //             isWarned: true,
+                                        //             reason: ""
+                                        //         }
+                                        //     });
+                                        //     break; // Added break statement
+                                        // case 'unwarn':
+                                        //     updateDocsData(jobId, 'job_posts', {
+                                        //         warning: {
+                                        //             isWarned: false,
+                                        //             reason: ""
+                                        //         }
+                                        //     });
+                                        //     break; // Added break statement
                                         default:
                                             console.log('something went wrong');
                                             break;
@@ -218,14 +218,14 @@ const JobTable = () => {
                                             }
                                         });
                                         break; // Added break statement
-                                    case 'warn':
-                                        updateDocsData(jobId, 'job_posts', {
-                                            warning: {
-                                                isWarned: true,
-                                                reason: document.getElementById('reasonText').value
-                                            }
-                                        });
-                                        break; // Added break statement
+                                    // case 'warn':
+                                    //     updateDocsData(jobId, 'job_posts', {
+                                    //         warning: {
+                                    //             isWarned: true,
+                                    //             reason: document.getElementById('reasonText').value
+                                    //         }
+                                    //     });
+                                    //     break; // Added break statement
                                     default:
                                         console.log('something went wrong');
                                         break;

@@ -8,8 +8,8 @@ const Services = () => {
 
     return (
         <div className={`container p-3 rounded ${style.servicesMain}`}>
-            <h2 className={style.topHeading}>Manage Services</h2>
-            <p className='text-secondary'>Manage & view services</p>
+           
+           
             <div className="bg-white rounded p-4">
                 <div className="d-flex flex-column justify-content-start">
 

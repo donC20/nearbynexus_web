@@ -19,7 +19,7 @@ const Sidebar = (props) => {
         try {
             setSignoutLoading(true);
             await auth.signOut().then(setSignoutLoading(false));
-            navigate('/');
+            navigate('/login');
         } catch (error) {
             console.error('Error logging out:', error.message);
         }
@@ -43,8 +43,8 @@ const Sidebar = (props) => {
                     </Link>
                     <hr />
                     <small className={style.subHeadings}>OTHERS</small>
-                    <Link to="/users">
-                        <div className={`${style.sideBarButton} ${style[tabIOn == "users" ? 'active' : '']}`} id='user_tab' onClick={() => settabIOn('users')} data-bs-dismiss={props.isSmallScreen ? 'offcanvas' : ''} aria-label="Close">
+                    <Link to="/users" id='user_tab'>
+                        <div className={`${style.sideBarButton} ${style[tabIOn == "users" ? 'active' : '']}`} onClick={() => settabIOn('users')} data-bs-dismiss={props.isSmallScreen ? 'offcanvas' : ''} aria-label="Close">
                             <i className="bi bi-people me-3"></i>
                             <span>Users</span>
                         </div>
@@ -69,12 +69,12 @@ const Sidebar = (props) => {
                     </Link>
                     <hr />
                     <small className={style.subHeadings}>ACCOUNT</small>
-                    <Link to="/settings">
+                    {/* <Link to="/settings">
                         <div className={`${style.sideBarButton} ${style[tabIOn == "settings" ? 'active' : '']}`} onClick={() => settabIOn('settings')} data-bs-dismiss={props.isSmallScreen ? 'offcanvas' : ''} aria-label="Close">
                             <i className="bi bi-gear-fill me-3"></i>
                             <span>Settings</span>
                         </div>
-                    </Link>
+                    </Link> */}
                     <div className={`${style.sideBarButton}`} onClick={handleLogout}>
                         <i className="bi bi-box-arrow-right me-3 text-danger"></i>
                         <span className='text-danger'>Logout</span>
