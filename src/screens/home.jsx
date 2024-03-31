@@ -12,9 +12,9 @@ const Home = () => {
                         <div className="mu-header-area">
 
                             {/* Start Logo*/}
-                            <div className="mu-logo-area">
+                            <div className="mu-logo-area ">
                                 {/* text based logo*/}
-                                <a className="mu-logo" href="#"><img src="images/logo.png" alt="" />NearbyNexus</a>
+                                <div className="mu-logo d-lg-block d-flex flex-column justify-content-center align-items-center" href="#"><img src="images/logo.png" alt="" /><span>NearbyNexus</span></div>
                                 {/* image based logo*/}
                                 {/* <a className="mu-logo" href="#"><img src="assets/images/logo.png" alt="logo img"></a>*/}
                             </div>
