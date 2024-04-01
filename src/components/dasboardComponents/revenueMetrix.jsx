@@ -85,10 +85,10 @@ const RevenueMatrix = () => {
 
     return (
         <div className="col p-4 rounded bg-white shadow">
-            <div className={`d-flex justify-content-between align-items-center ${style.amountValue}`}>
+            <h5>Revenue</h5>
+            <div className={`d-flex flex-column flex-lg-row gap-2 justify-content-between align-items-center ${style.amountValue}`}>
                 <div className="title d-flex flex-column">
-                    <h5>Revenue</h5>
-                    <div className='d-flex gap-2'>
+                    <div className='d-flex gap-3'>
                         <select name="month" id={style.monthSelector} value={selectedMonth} onChange={(e) => setSelectedMonth(parseInt(e.target.value))}>
                             {Array.from({ length: 12 }, (_, index) => index + 1).map((month) => (
                                 <option key={month} value={month}>{new Date(selectedYear, month - 1).toLocaleString('default', { month: 'long' })}</option>
@@ -105,7 +105,7 @@ const RevenueMatrix = () => {
                     </div>
                 </div>
                 <div>
-                    <span><i className="bi bi-currency-rupee"></i>{totalRevenue}</span>
+                    <span><i className="bi bi-currency-rupee"></i>{totalRevenue.toFixed(3)}</span>
                 </div>
             </div>
             <br />
