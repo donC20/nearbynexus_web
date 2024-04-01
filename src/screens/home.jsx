@@ -176,7 +176,7 @@ const Home = () => {
                                             <h2>Download now!</h2>
                                             <p className='text-light'>Get started today and unlock a world of convenience at your fingertips. Download the app now to experience seamless service connections like never before.</p>
 
-                                            <a className="mu-google-btn mt-2" href="#"><i className="fa fa-android"></i><span>Download Now</span></a>
+                                            <a onClick={downloadApp} className="mu-google-btn mt-2" href="#"><i className="fa fa-android"></i><span>Download Now</span></a>
 
                                         </div>
                                     </div>
