@@ -218,7 +218,13 @@ const Home = () => {
                                     <div className="single-screeshot">
                                         <img src="assets/images/screenshot/phoneHalf.png" alt="App screenshot img" />
                                     </div>
-
+                                    <div className="counts d-flex justify-content-center mt-5 gap-3">
+                                        <span><b>500+</b> Downloads</span>
+                                        <div className="vr"></div>
+                                        <span><b>100+</b> Users</span>
+                                        <div className="vr"></div>
+                                        <span><b>1000+</b> Jobs</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>

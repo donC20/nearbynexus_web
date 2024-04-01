@@ -1105,6 +1105,12 @@ button:focus {
 }
 
 
+.counts span{
+	font-size: 35px;
+	/* font-weight: bold; */
+}
+
+
 
 /*--------------------*/
 /* RESPONSIVE STYLE */
