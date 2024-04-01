@@ -1105,8 +1105,12 @@ button:focus {
 }
 
 
-.counts span{
+.counts-lg span{
 	font-size: 35px;
+	/* font-weight: bold; */
+}
+.counts-sm span{
+	font-size: 20px;
 	/* font-weight: bold; */
 }
 

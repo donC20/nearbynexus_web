@@ -1,6 +1,13 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import style from '../css/settings.module.css'
 const Settings = () => {
+    useEffect(() => {
+        document.title = 'NearbyNexus | Admin';
+        return () => {
+          // Reset the document title when the component unmounts
+          document.title = 'NearbyNexus';
+        };
+      }, []);
     return (
         <div className='container p-4'>
             <h2 className={style.topHeading}>Settings</h2>

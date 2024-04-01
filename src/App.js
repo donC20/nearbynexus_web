@@ -26,6 +26,8 @@ function App() {
     toast.error("Sorry this login is forebidden!");
   };
 
+ 
+
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       const validateUser = async () => {
@@ -59,9 +61,10 @@ function App() {
     );
   }
 
-
+  
 
   return (
+
 
     <Router>
       <div>

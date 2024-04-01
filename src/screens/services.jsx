@@ -1,11 +1,17 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import style from '../css/services.module.css';
 import AddServices from '../components/servicePage/addServices';
 import AllServices from '../components/servicePage/allServices';
 
 const Services = () => {
     const [screen, setScreen] = useState('addService');
-
+    useEffect(() => {
+        document.title = 'NearbyNexus | Admin';
+        return () => {
+          // Reset the document title when the component unmounts
+          document.title = 'NearbyNexus';
+        };
+      }, []);
     return (
         <div className={`container p-3 rounded ${style.servicesMain}`}>
            

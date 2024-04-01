@@ -1,11 +1,18 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom';
 import style from '../css/proposals.module.css'
 import JobDetails from '../components/jobPosts/jobDetails';
 import AllProposals from '../components/jobPosts/allProposals';
 const Proposals = () => {
+    
     const { id } = useParams();
-
+    useEffect(() => {
+        document.title = 'NearbyNexus | Admin';
+        return () => {
+          // Reset the document title when the component unmounts
+          document.title = 'NearbyNexus';
+        };
+      }, []);
     return (
         <div className='container p-4'>
             <div className="d-flex flex-column justify-content-start">

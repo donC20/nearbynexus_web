@@ -8,6 +8,13 @@ const Dashboard = () => {
     const [userOnlineCount, setUserOnlineCount] = useState(0);
     const [generalUserCount, setgeneralUserCount] = useState(0);
     useEffect(() => {
+        document.title = 'NearbyNexus | Admin';
+        return () => {
+            // Reset the document title when the component unmounts
+            document.title = 'NearbyNexus';
+        };
+    }, []);
+    useEffect(() => {
         // get user count
         getAllDataOnCondition('users', [
             { field: 'userType', operator: '!=', value: 'admin' },

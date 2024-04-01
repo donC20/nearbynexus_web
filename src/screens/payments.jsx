@@ -1,10 +1,17 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import style from '../css/payments.module.css'
 import PaymentLogTable from '../components/payments/paymentLogTable'
 import TopTileComponent from '../components/payments/topTileComponent';
 const Payments = () => {
     const [totalTransactions, settotalTransactions] = useState(0);
     const [totalCommission, settotalCommission] = useState(0);
+    useEffect(() => {
+        document.title = 'NearbyNexus | Admin';
+        return () => {
+          // Reset the document title when the component unmounts
+          document.title = 'NearbyNexus';
+        };
+      }, []);
     const handlePassedData = (totalAmount, totalCommission) => {
         settotalTransactions(totalAmount)
         settotalCommission(totalCommission)

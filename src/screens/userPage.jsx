@@ -11,7 +11,13 @@ const UserPage = () => {
     const [selectedUser, setSelectedUser] = useState(null); // State to hold the currently selected user
     const [searchQuery, setSearchQuery] = useState(''); // State to hold the search query
     const [loading, setLoading] = useState(true); // State to hold the search query
-
+    useEffect(() => {
+        document.title = 'NearbyNexus | Admin';
+        return () => {
+          // Reset the document title when the component unmounts
+          document.title = 'NearbyNexus';
+        };
+      }, []);
     useEffect(() => {
         // Fetch data when component mounts
         setLoading(true)

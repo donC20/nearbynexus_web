@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import '../css/style.css'
 import AppScreenshotSlider from '../components/appScreenSlider'
 
 const Home = () => {
+
     function downloadApp() {
         window.open("https://nearbynexusblob.blob.core.windows.net/nearbynexus-blobstore/NearbyNexus%20v1.0.0.apk", "_blank");
     }
@@ -218,12 +219,17 @@ const Home = () => {
                                     <div className="single-screeshot">
                                         <img src="assets/images/screenshot/phoneHalf.png" alt="App screenshot img" />
                                     </div>
-                                    <div className="counts d-flex justify-content-center mt-5 gap-3">
+                                    <div className="counts-lg d-none d-lg-flex justify-content-center mt-5 gap-3">
                                         <span><b>500+</b> Downloads</span>
                                         <div className="vr"></div>
                                         <span><b>100+</b> Users</span>
                                         <div className="vr"></div>
                                         <span><b>1000+</b> Jobs</span>
+                                    </div>
+                                    <div className="counts-sm d-flex d-lg-none flex-column justify-content-start align-items-center mt-5 gap-3">
+                                        <span>Downloads | <b>500+</b> </span>
+                                        <span>Users | <b>100+</b></span>
+                                        <span>Jobs | <b>1000+</b></span>
                                     </div>
                                 </div>
                             </div>
