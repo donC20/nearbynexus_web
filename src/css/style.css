@@ -753,11 +753,10 @@ button:focus {
 }
 
 
-.single-screeshot{
+.single-screeshot {
 	width: 100%;
 }
 
-.mu-apps-screenshot-slider {}
 
 .mu-single-screeshot {
 	padding: 0 10px;
@@ -765,6 +764,7 @@ button:focus {
 	-webkit-transition: all 0.3s ease 0s;
 	transition: all 0.3s ease 0s;
 }
+
 .mu-single-screeshot img {
 	height: 80rem;
 	width: 40rem !important;
@@ -894,183 +894,6 @@ button:focus {
 }
 
 
-/*--------------------*/
-/* CONTACT US */
-/*--------------------*/
-
-#mu-contact {
-	background-color: #fff;
-	display: inline;
-	float: left;
-	width: 100%;
-}
-
-.mu-contact-area {
-	display: inline;
-	float: left;
-	padding: 100px 0;
-	width: 100%;
-}
-
-.mu-contact-header {
-	display: inline;
-	float: left;
-	text-align: center;
-	width: 100%;
-	padding: 0 120px;
-}
-
-.mu-contact-content {
-	display: inline;
-	float: left;
-	margin-top: 50px;
-	padding: 0 120px;
-	width: 100%;
-}
-
-.mu-contact-right {
-	display: inline;
-	float: left;
-	width: 100%;
-	margin-top: 10px;
-	padding-left: 15px;
-}
-
-.mu-contact-right-single {
-	display: inline;
-	float: left;
-	margin-bottom: 35px;
-	width: 100%;
-}
-
-.mu-contact-right-single .mu-icon {
-	background-color: transparent;
-	font-size: 20px;
-	display: block;
-	width: 50px;
-	height: 50px;
-	text-align: center;
-	line-height: 50px;
-	border-radius: 50%;
-	float: left;
-	margin-right: 15px;
-}
-
-.mu-contact-right-single p {
-	margin-bottom: 0;
-}
-
-
-.mu-contact-left {
-	display: inline;
-	float: left;
-	width: 100%;
-}
-
-.mu-contact-form .form-group input {
-	background: transparent;
-	border-radius: 10px;
-	color: #333;
-	font-size: 15px;
-	border: 1px solid #888;
-	height: 45px;
-	margin-bottom: 24px;
-}
-
-.mu-contact-form .form-group textarea {
-	background: transparent;
-	border: 1px solid #888;
-	border-radius: 10px;
-	color: #333;
-	font-size: 18px;
-	padding: 10px;
-	height: 190px;
-}
-
-.mu-contact-form .form-control:focus {
-	background-color: #fff;
-	outline: 0;
-	box-shadow: none;
-}
-
-.mu-contact-form .form-control::-webkit-input-placeholder {
-	color: #888;
-	font-size: 15px;
-}
-
-.mu-contact-form .form-control:-moz-placeholder {
-	/* Firefox 18- */
-	color: #888;
-	font-size: 15px;
-}
-
-.mu-contact-form .form-control::-moz-placeholder {
-	/* Firefox 19+ */
-	color: #888;
-	font-size: 15px;
-}
-
-.mu-contact-form .form-control:-ms-input-placeholder {
-	color: #888;
-	font-size: 15px;
-}
-
-.mu-contact-form .button-default::after,
-.mu-contact-form .button-default>span {
-	padding: 12px 40px;
-}
-
-.mu-social-media {
-	display: inline;
-	float: left;
-	width: 100%;
-}
-
-.mu-social-media a {
-	border: 1px solid #19191a;
-	border-radius: 50px;
-	color: #19191a;
-	display: inline-block;
-	font-size: 12px;
-	margin-right: 10px;
-	text-align: center;
-	text-decoration: none;
-	transition: all 0.2s ease-in-out 0s;
-	width: 35px;
-	height: 35px;
-	line-height: 35px;
-	font-size: 15px;
-}
-
-#form-messages {
-	margin-bottom: 10px;
-	background-color: #fff;
-}
-
-.success {
-	padding: 1em;
-	margin-bottom: 0.75rem;
-	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
-	color: #468847;
-	background-color: #dff0d8;
-	border: 1px solid #d6e9c6;
-	-webkit-border-radius: 4px;
-	-moz-border-radius: 4px;
-	border-radius: 4px;
-}
-
-.error {
-	padding: 1em;
-	margin-bottom: 0.75rem;
-	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
-	color: #b94a48;
-	background-color: #f2dede;
-	border: 1px solid rgba(185, 74, 72, 0.3);
-	-webkit-border-radius: 4px;
-	-moz-border-radius: 4px;
-	border-radius: 4px;
-}
-
 
 
 /*--------------------*/
@@ -1105,11 +928,12 @@ button:focus {
 }
 
 
-.counts-lg span{
+.counts-lg span {
 	font-size: 35px;
 	/* font-weight: bold; */
 }
-.counts-sm span{
+
+.counts-sm span {
 	font-size: 20px;
 	/* font-weight: bold; */
 }
@@ -1148,6 +972,7 @@ button:focus {
 		padding: 0;
 	}
 
+	
 
 }
 
@@ -1240,6 +1065,11 @@ button:focus {
 		width: 200px;
 	}
 
+	.mu-single-screeshot img {
+		height: 60rem;
+		width: 30rem !important;
+	}
+
 
 }
 
@@ -1261,6 +1091,10 @@ button:focus {
 		padding: 0;
 	}
 
+	.mu-single-screeshot img {
+		height: 30rem;
+		width: 15rem !important;
+	}
 
 }
 
@@ -1292,7 +1126,10 @@ button:focus {
 		height: 250px;
 	}
 
-
+	.mu-single-screeshot img {
+		height: 20rem;
+		width: 10rem !important;
+	}
 
 }
 

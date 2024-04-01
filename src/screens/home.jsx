@@ -3,7 +3,13 @@ import '../css/style.css'
 import AppScreenshotSlider from '../components/appScreenSlider'
 
 const Home = () => {
-
+    useEffect(() => {
+        document.title = 'NearbyNexus | Home';
+        return () => {
+            // Reset the document title when the component unmounts
+            document.title = 'NearbyNexus';
+        };
+    }, []);
     function downloadApp() {
         window.open("https://nearbynexusblob.blob.core.windows.net/nearbynexus-blobstore/NearbyNexus%20v1.0.0.apk", "_blank");
     }

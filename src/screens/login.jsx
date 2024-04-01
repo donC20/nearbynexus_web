@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import style from '../css/login.module.css';
 import { Link } from 'react-router-dom';
 import { GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
@@ -13,7 +13,13 @@ const Login = () => {
     const [isSigningIn, setIsSigningIn] = useState(false);
     const [signInError, setSignInError] = useState(null);
     const [loading, setloading] = useState(false);
-
+    useEffect(() => {
+        document.title = 'NearbyNexus | Admin';
+        return () => {
+          // Reset the document title when the component unmounts
+          document.title = 'NearbyNexus';
+        };
+      }, []);
     const validateInputs = () => {
         let isValid = true;
 
