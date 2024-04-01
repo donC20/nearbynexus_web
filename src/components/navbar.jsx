@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { doc, getDoc, getFirestore } from 'firebase/firestore';
 import { auth } from '../firebase';
 import Sidebar from './Sidebar';
@@ -14,14 +14,42 @@ const Navbar = () => {
 
     const [userCount, setUserCount] = useState(0);
     const [userOnlineCount, setUserOnlineCount] = useState(0);
-    const [generalUserCount, setgeneralUserCount] = useState(0);
+    const [generalUserCount, setGeneralUserCount] = useState(0);
     const [hoverIOn, setHoverIOn] = useState('');
-    const [notifications, setnotifications] = useState([]);
-    const [notificationLoader, setnotificationLoader] = useState(true);
+    const [notifications, setNotifications] = useState([]);
+    const [notificationLoader, setNotificationLoader] = useState(true);
+    const [showNotificationBadge, setShowNotificationBadge] = useState(false);
 
+    // Function to fetch new users and jobs
+    const fetchNewUsersAndJobs = useCallback(() => {
+        fetchDocDataRealtime('app_config', 'notifications', (appConfigData) => {
+            if (appConfigData) {
+                const new_user_list = appConfigData.new_users;
+                const new_jobs_list = appConfigData.new_jobs;
+
+                new_user_list.forEach(uid => {
+                    fetchDocDataRealtime('users', uid, (userData) => {
+                        if (userData) {
+                            setNotifications(prevNotifications => [...prevNotifications, { type: 'user', data: userData }]);
+                        }
+                    });
+                });
+
+                new_jobs_list.forEach(jobId => {
+                    fetchDocDataRealtime('job_posts', jobId, async (jobData) => {
+                        if (jobData) {
+                            const postedBy = await fetchDocData('users', jobData.jobPostedBy.id);
+                            setNotifications(prevNotifications => [...prevNotifications, { type: 'job', data: jobData, postBy: postedBy }]);
+                        }
+                    });
+                });
+
+                setNotificationLoader(false);
+            }
+        });
+    }, []);
 
     useEffect(() => {
-        // Fetch user data and counts
         const fetchData = async () => {
             const currentUser = auth.currentUser;
             if (currentUser) {
@@ -40,41 +68,6 @@ const Navbar = () => {
             }
         };
 
-        const fetchNewUsersAndJobs = () => {
-            // Fetch app_config to get new_user_list and new_jobs_list
-
-            fetchDocDataRealtime('app_config', 'notifications', (appConfigData) => {
-
-                if (appConfigData) {
-                    const new_user_list = appConfigData.new_users;
-                    const new_jobs_list = appConfigData.new_jobs;
-                    // Fetch new users
-                    new_user_list.forEach(uid => {
-                        fetchDocDataRealtime('users', uid, (userData) => {
-                            if (userData) {
-                                setnotifications(prevNotifications => [...prevNotifications, { type: 'user', data: userData }]);
-                            }
-                        });
-                    });
-
-                    // Fetch new jobs
-                    new_jobs_list.forEach(jobId => {
-                        fetchDocDataRealtime('job_posts', jobId, async (jobData) => {
-                            if (jobData) {
-                                const postedBy = await fetchDocData('users', jobData.jobPostedBy.id);
-                                setnotifications(prevNotifications => [...prevNotifications, { type: 'job', data: jobData, postBy: postedBy }]);
-                            }
-                        });
-                    });
-
-                    // Set notificationLoader to false after fetching
-                    setnotificationLoader(false);
-                }
-            });
-        };
-
-
-        // Fetch user counts
         getAllDataOnCondition('users', [
             { field: 'userType', operator: '!=', value: 'admin' },
             { field: 'status', operator: '==', value: 'active' }
@@ -93,29 +86,40 @@ const Navbar = () => {
         getAllDataOnCondition('users', [
             { field: 'userType', operator: '==', value: 'general_user' },
         ], (data) => {
-            setgeneralUserCount(data.length);
+            setGeneralUserCount(data.length);
         });
 
         fetchData();
         fetchNewUsersAndJobs();
-        console.log('noti data ', notifications);
-    }, [db]);
+    }, [db, fetchNewUsersAndJobs]);
+
+    useEffect(() => {
+        const oldNotifications = localStorage.getItem('oldNotifications');
+
+        if (oldNotifications !== null && !isNaN(parseInt(oldNotifications))) {
+            if (notifications.length !== parseInt(oldNotifications)) {
+                setShowNotificationBadge(true);
+            } else {
+                setShowNotificationBadge(false);
+            }
+        } else {
+            console.log("Invalid or missing oldNotifications value in local storage");
+        }
+    }, [notifications]);
 
     const userName = userData ? userData.name : "user";
     const userImage = userData ? (userData.image || "raster/avatar-1.png") : "raster/avatar-1.png";
-    console.log(notifications);
-
-    // load notifications
-
 
     const setSeenNotifications = async () => {
-        setHoverIOn('')
+        localStorage.setItem('oldNotifications', notifications.length);
+        setHoverIOn('');
         if (notifications.length >= 10) {
-            setnotifications([])
-            updateDocsData('notifications', 'app_config', { new_jobs: [] })
-            updateDocsData('notifications', 'app_config', { new_users: [] })
+            setNotifications([]);
+            updateDocsData('notifications', 'app_config', { new_jobs: [] });
+            updateDocsData('notifications', 'app_config', { new_users: [] });
         }
-    }
+    };
+
 
     return (
         <div>
@@ -334,8 +338,9 @@ const Navbar = () => {
                                     <div className={`notificationsWrapper position-relative `} onMouseEnter={() =>
                                         setHoverIOn('notifications')} onMouseLeave={setSeenNotifications}>
                                         <div className="d-flex gap-2">
+                                            {/* badge notification */}
                                             <i className="bi bi-bell-fill text-light">
-                                                {notifications.length > 0 ?
+                                                {showNotificationBadge ?
                                                     <span class="position-absolute top-0 start-100 translate-middle p-1 bg-danger rounded-circle">
                                                         <span class="visually-hidden">New alerts</span>
                                                     </span> : <></>
