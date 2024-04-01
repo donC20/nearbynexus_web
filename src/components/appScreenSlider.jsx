@@ -16,7 +16,7 @@ const AppScreenshotSlider = () => {
                                 <p>Experience the essence of our app's sleek design and cutting-edge capabilities encapsulated in these vibrant screenshots, capturing its dynamic interface and user-friendly navigation.</p>
                             </div>
                             <div className="mu-apps-screenshot-content d-flex justify-content-center">
-                                <Carousel autoPlay interval={3000} infiniteLoop dynamicHeight={true} showThumbs={false} verticalSwipe="natural" showArrows={true} showStatus={false} >
+                                <Carousel autoPlay interval={3000} infiniteLoop dynamicHeight={true} showThumbs={false} verticalSwipe="natural" autoFocus={true} showArrows={true} showStatus={false} >
                                     <div className="mu-single-screeshot">
                                         <img src="assets/images/screenshot/job feed.png" alt="App screenshot img" />
                                     </div>
