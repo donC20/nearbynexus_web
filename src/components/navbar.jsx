@@ -47,7 +47,7 @@ const Navbar = () => {
                 setNotificationLoader(false);
             }
         });
-    }, []);
+    }, [notifications]);
 
     useEffect(() => {
         const fetchData = async () => {

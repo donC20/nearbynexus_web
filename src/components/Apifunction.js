@@ -31,10 +31,13 @@ export function getAllDataOnCondition(collectionName, conditions = null, callbac
         conditions = [conditions];
     }
 
-    // Add each condition to the query
+    // Add each condition to the query if conditions are provided
     if (conditions) {
         conditions.forEach((condition) => {
-            q = query(q, where(condition.field, condition.operator, condition.value));
+            // Check for null fields, operators, and values before adding condition
+            if (condition.field && condition.operator && condition.value != null) {
+                q = query(q, where(condition.field, condition.operator, condition.value));
+            }
         });
     }
 
@@ -46,6 +49,7 @@ export function getAllDataOnCondition(collectionName, conditions = null, callbac
         callback(data);
     });
 }
+
 
 
 // delete document

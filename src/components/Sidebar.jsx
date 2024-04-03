@@ -64,7 +64,13 @@ const Sidebar = (props) => {
                     <Link to="/payments">
                         <div className={`${style.sideBarButton} ${style[tabIOn == "payments" ? 'active' : '']}`} onClick={() => settabIOn('payments')} data-bs-dismiss={props.isSmallScreen ? 'offcanvas' : ''} aria-label="Close">
                             <i className="bi bi-credit-card-fill me-3"></i>
-                            <span>Payments</span>
+                            <span>Finance</span>
+                        </div>
+                    </Link>
+                    <Link to="/reports">
+                        <div className={`${style.sideBarButton} ${style[tabIOn == "report" ? 'active' : '']}`} onClick={() => settabIOn('report')} data-bs-dismiss={props.isSmallScreen ? 'offcanvas' : ''} aria-label="Close">
+                            <i className="bi bi-flag-fill me-3"></i>
+                            <span>Reports</span>
                         </div>
                     </Link>
                     <hr />

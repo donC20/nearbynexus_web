@@ -1,0 +1,17 @@
+.avatar {
+    width: 30px;
+    height: 30px;
+    object-fit: cover;
+}
+
+.firstName {
+    color: var(--primary-color);
+}
+
+.secondName {
+    color: red;
+}
+
+.moreBtn {
+    background-color: transparent;
+}

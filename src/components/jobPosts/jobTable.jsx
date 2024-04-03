@@ -14,6 +14,7 @@ const JobTable = () => {
     useEffect(() => {
         setLoading(true);
         getAllDataOnCondition('job_posts', [], async (data) => {
+            console.log(data);
             const newData = await Promise.all(data.map(async (item) => {
                 const postedBy = await fetchDocData('users', item.jobPostedBy.id);
                 return {

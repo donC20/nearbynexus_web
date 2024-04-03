@@ -17,6 +17,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Payments from './screens/payments.jsx';
 import Settings from './screens/settings.jsx';
 import Home from './screens/home.jsx';
+import Reports from './screens/reports.jsx';
 
 function App() {
   const [isLoggedIn, setLoginStatus] = useState(false);
@@ -90,6 +91,7 @@ function App() {
                   <Route path="/services" element={<Services />} />
                   <Route path="/payments" element={<Payments />} />
                   <Route path="/settings" element={<Settings />} />
+                  <Route path="/reports" element={<Reports />} />
                 </Routes>
               </div>
             </div>
