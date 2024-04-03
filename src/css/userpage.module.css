@@ -88,3 +88,9 @@
 
   /* Add a shadow effect */
 }
+.filterBtn	{
+  border-radius: 100px;
+  border: 1px solid grey;
+  width: 100px;
+  background-color: white;
+}

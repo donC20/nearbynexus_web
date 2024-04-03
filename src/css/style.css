@@ -766,8 +766,8 @@ button:focus {
 }
 
 .mu-single-screeshot img {
-	height: 80rem;
-	width: 40rem !important;
+	height: 40rem;
+	width: 20rem !important;
 }
 
 .mu-apps-screenshot-slider .slick-next {

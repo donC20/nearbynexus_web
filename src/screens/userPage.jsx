@@ -80,9 +80,9 @@ const UserPage = () => {
                 <p className='text-secondary'>Manage all users from a single place.</p>
             </div>
             {/* Search input field */}
-            <div className="mb-3 d-flex">
+            <div className="mb-3 d-flex gap-2">
                 <input type="text" className="form-control" placeholder="Search by name" value={searchQuery} onChange={handleSearchInputChange} />
-                {/* <button>filter</button> */}
+                <button className={style.filterBtn}>filter</button>
             </div>
             {/* all users container */}
             {loading ? <div className='d-flex justify-content-center'>
