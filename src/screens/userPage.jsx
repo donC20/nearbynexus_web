@@ -11,23 +11,24 @@ const UserPage = () => {
     const [selectedUser, setSelectedUser] = useState(null); // State to hold the currently selected user
     const [searchQuery, setSearchQuery] = useState(''); // State to hold the search query
     const [loading, setLoading] = useState(true); // State to hold the search query
+    const [filterOptions, setFilterOptions] = useState([{ field: 'userType', operator: '!=', value: 'admin' }]);
     useEffect(() => {
         document.title = 'NearbyNexus | Admin';
         return () => {
-          // Reset the document title when the component unmounts
-          document.title = 'NearbyNexus';
+            // Reset the document title when the component unmounts
+            document.title = 'NearbyNexus';
         };
-      }, []);
+    }, []);
     useEffect(() => {
         // Fetch data when component mounts
         setLoading(true)
-        getAllDataOnCondition('users', [{ field: 'userType', operator: '!=', value: 'admin' }], (data) => {
+        getAllDataOnCondition('users', filterOptions, (data) => {
             setUsers(data);
             setFilteredUsers(data);
             setLoading(false)
 
         });
-    }, []); // Empty dependency array ensures this effect runs only once
+    }, [filterOptions]); // Empty dependency array ensures this effect runs only once
 
     // Function to handle click on the info button and set the selected user
     const handleInfoClick = (user) => {
@@ -73,6 +74,34 @@ const UserPage = () => {
     }
 
 
+    const getFilterConditions = () => {
+        const conditions = [{ field: 'userType', operator: '!=', value: 'admin' }];
+        var userType = document.getElementById('userType').value;
+        var status = document.getElementById('status').value;
+        var activity = document.getElementById('activity').value;
+        var filterEmail = document.getElementById('filterEmail').value;
+        var kycStatus = document.getElementById('kycStatus').value;
+        if (userType !== 'all') {
+            conditions.push({ field: 'userType', operator: '==', value: userType });
+        }
+        if (status !== 'all') {
+            conditions.push({ field: 'status', operator: '==', value: status });
+        }
+        if (activity !== 'all') {
+            conditions.push({ field: 'online', operator: '==', value: activity === 'true' });
+        }
+        if (filterEmail !== 'all') {
+            conditions.push({ field: 'emailId.verified', operator: '==', value: filterEmail === 'true' });
+
+        }
+        if (kycStatus !== 'all') {
+            conditions.push({ field: 'kyc.verified', operator: '==', value: kycStatus === 'true' }, { field: 'userType', operator: '==', value: 'vendor' });
+
+        }
+        setFilterOptions(conditions);
+    };
+
+
     return (
         <div className="container p-4 ">
             <div className="d-flex flex-column justify-content-start">
@@ -82,7 +111,89 @@ const UserPage = () => {
             {/* Search input field */}
             <div className="mb-3 d-flex gap-2">
                 <input type="text" className="form-control" placeholder="Search by name" value={searchQuery} onChange={handleSearchInputChange} />
-                <button className={style.filterBtn}>filter</button>
+                <button className={style.filterBtn} data-bs-toggle="modal" data-bs-target="#filterContainer"><i className="bi bi-filter me-2"></i>Filter</button>
+            </div>
+            <div class="modal fade" id="filterContainer" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="d-flex justify-content-between">
+                                <small><b>User type</b></small>
+                                <div><select
+                                    class="form-select form-select-sm shadow-none"
+                                    name=""
+                                    id="userType"
+                                >
+                                    <option disabled>Select one</option>
+                                    <option value="all">All</option>
+                                    <option value="vendor">Vendors</option>
+                                    <option value="general_user">Users</option>
+                                </select></div>
+                            </div>
+                            <div class="d-flex justify-content-between mt-3">
+                                <small><b>Status</b></small>
+                                <div><select
+                                    class="form-select form-select-sm shadow-none"
+                                    name=""
+                                    id="status"
+                                >
+                                    <option disabled>Select one</option>
+                                    <option value="all">All</option>
+                                    <option value="active">Active</option>
+                                    <option value="disabled">Disabled</option>
+                                </select></div>
+                            </div>
+                            <div class="d-flex justify-content-between mt-3">
+                                <small><b>Activity</b></small>
+                                <div><select
+                                    class="form-select form-select-sm shadow-none"
+                                    name=""
+                                    id="activity"
+                                >
+                                    <option disabled>Select one</option>
+                                    <option value="all">All</option>
+                                    <option value='true'>Online</option>
+                                    <option value='false'>Offline</option>
+                                </select></div>
+                            </div>
+                            <div class="d-flex justify-content-between mt-3">
+                                <small><b>Email</b></small>
+                                <div><select
+                                    class="form-select form-select-sm shadow-none"
+                                    name=""
+                                    id="filterEmail"
+                                >
+                                    <option disabled>Select one</option>
+                                    <option value="all">All</option>
+                                    <option value='true'>Verified</option>
+                                    <option value='false'>Unverified</option>
+                                </select></div>
+                            </div>
+                            <div class="d-flex justify-content-between mt-3">
+                                <small><b>KYC status</b></small>
+                                <div><select
+                                    class="form-select form-select-sm shadow-none"
+                                    name=""
+                                    id="kycStatus"
+                                >
+                                    <option disabled>Select one</option>
+                                    <option value="all">All</option>
+                                    <option value='true'>Verified</option>
+                                    <option value='false'>Unverified</option>
+                                </select></div>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onClick={getFilterConditions}>Filter</button>
+                        </div>
+                    </div>
+                </div>
             </div>
             {/* all users container */}
             {loading ? <div className='d-flex justify-content-center'>
