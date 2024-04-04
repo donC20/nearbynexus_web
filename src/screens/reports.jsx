@@ -72,7 +72,7 @@ const Reports = () => {
                                         <button className="btn btn-transparent border-0" data-bs-toggle="dropdown" aria-expanded="false"><i className="bi bi-three-dots-vertical"></i></button>
                                         <ul className="dropdown-menu">
                                             <li className="dropdown-item" onClick={() => updateField(singleReport.id)}><small><i className="bi bi-check2-all me-2 text-success"></i>Mark as reviewed</small></li>
-                                            <li className="dropdown-item"><small><i className="bi bi-binoculars-fill me-2 text-danger"></i>Inspect Romeo</small></li>
+                                            {/* <li className="dropdown-item"><small><i className="bi bi-binoculars-fill me-2 text-danger"></i>Inspect Romeo</small></li> */}
                                         </ul>
                                     </div>
                                     <small>{formatDate(singleReport.report.reportedOn)}</small>
